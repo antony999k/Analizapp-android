@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Analizapp</string>
+    <string name="passwordHint">Password</string>
+    <string name="mailHint">Username or Password</string>
+    <string name="Login">LOG IN</string>
+    <string name="Name">Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Mail">Email</string>
+    <string name="SignIn">Create your account</string>
+    <string name="Terms">By creating an account you agree to our</string>
+    <string name="AlreadyHaveAccount">Already have an account?</string>
 </resources>
