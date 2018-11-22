@@ -9,4 +9,5 @@
     <string name="SignIn">Create your account</string>
     <string name="Terms">By creating an account you agree to our</string>
     <string name="AlreadyHaveAccount">Already have an account?</string>
+    <string name="NoTienesCuenta">¿No tienes cuenta aun? Crea una</string>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:ems="10"
-        android:hint="@string/mailHint"
+        android:hint="Correo"
         android:inputType="textPersonName" />
 
     <EditText
@@ -27,9 +27,18 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="@string/Login" />
+        android:text="@string/Login"
+        android:onClick="sendLogin"/>
+
+    <TextView
+        android:id="@+id/crearCuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/NoTienesCuenta"
+        android:onClick="signupLink"/>
+
 </LinearLayout>
