@@ -44,9 +44,8 @@ public class Login extends AppCompatActivity {
 
     public void login(View view){
         //Toast.makeText(this, "entro", Toast.LENGTH_LONG).show();
-
         if (!validate()) {
-            onLoginFailed();
+            onNotValidate();
             return;
         }
 
@@ -81,8 +80,7 @@ public class Login extends AppCompatActivity {
                         onLoginSuccess(response);
                         progressDialog.dismiss();
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -95,7 +93,7 @@ public class Login extends AppCompatActivity {
                 30000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        
+
         queue.add(postRequest);
     }
 
@@ -112,7 +110,9 @@ public class Login extends AppCompatActivity {
             SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("token", token);
-            Toast.makeText(getBaseContext(), "Login exitoso", Toast.LENGTH_LONG).show();
+            editor.commit();
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivityForResult(intent, REQUEST_SIGNUP);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -120,6 +120,11 @@ public class Login extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "El nombre de usuario o la contraseña no coincide con nuestros registros. Intenta de nuevo", Toast.LENGTH_LONG).show();
+        loginBtn.setEnabled(true);
+    }
+
+    public void onNotValidate(){
+        Toast.makeText(getBaseContext(), "Ingresa todos los campos correctamente", Toast.LENGTH_LONG).show();
         loginBtn.setEnabled(true);
     }
 

@@ -10,4 +10,6 @@
     <string name="mailHint">Usuario o Correo</string>
     <string name="AlreadyHaveAccount">¿Ya tienes una cuenta? Ingresa Aquí</string>
     <string name="NotAccount">¿No tienes cuenta? Registrate</string>
+    <string name="ImageProfileDescription">Imagen de usuario</string>
+    <string name="imageBgDescription">Imagen de fondo</string>
 </resources>

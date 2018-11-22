@@ -10,4 +10,6 @@
     <string name="Terms">By creating an account you agree to our terms and conditions</string>
     <string name="AlreadyHaveAccount">Already have an account? Login</string>
     <string name="NotAccount">You don´t hava account? signup</string>
+    <string name="ImageProfileDescription">Avatar Picrure</string>
+    <string name="imageBgDescription">Background Picture</string>
 </resources>
