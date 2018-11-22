@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.loginBtn);
     }
 
-    public void sendLogin(View view){
+    public void login(View view){
         //Toast.makeText(this, "entro", Toast.LENGTH_LONG).show();
 
         if (!validate()) {
@@ -120,7 +120,7 @@ public class Login extends AppCompatActivity {
         }
 
         if (passwordStr.isEmpty() || passwordStr.length() < 4) {
-            password.setError("Ingresa contraseña mayor a 4 caracteres");
+            password.setError("Ingresa contraseña mayor a 6 caracteres");
             valid = false;
         } else {
             password.setError(null);

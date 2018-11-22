@@ -41,20 +41,22 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signupBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/SignIn" />
+        android:text="@string/SignIn"
+        android:onClick="signup"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loginLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/AlreadyHaveAccount"
+        android:onClick="loginLink"/>
+
+    <TextView
+        android:id="@+id/termsLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Terms" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/AlreadyHaveAccount" />
 </LinearLayout>
