@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="globalPadding">15dp</dimen>
+    <dimen name="cardCornerRadius">4dp</dimen>
 </resources>

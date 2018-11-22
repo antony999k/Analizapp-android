@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         loginBtn.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(Login.this,
-                R.style.AnalizapTheme);
+                R.style.AnalizapTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Autenticando...");
         progressDialog.show();
@@ -99,7 +99,6 @@ public class Login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // disable going back to the MainActivity
         moveTaskToBack(true);
     }
 
@@ -109,10 +108,9 @@ public class Login extends AppCompatActivity {
             String token = resp.getString("token");
             SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("token", token);
-            editor.commit();
-            Intent intent = new Intent(getApplicationContext(), Profile.class);
-            startActivityForResult(intent, REQUEST_SIGNUP);
+            editor.putString("token", token).commit();
+            startActivity(new Intent(Login.this, Profile.class));
+            finish();
         } catch (JSONException e) {
             e.printStackTrace();
         }

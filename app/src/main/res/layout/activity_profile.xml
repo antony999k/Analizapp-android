@@ -44,6 +44,15 @@
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
+            <ProgressBar
+                android:id="@+id/user_profile_loading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="76dp"
+                android:visibility="gone"></ProgressBar>
+
             <TextView
                 android:id="@+id/user_profile_name"
                 android:layout_width="wrap_content"
@@ -62,7 +71,49 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:textColor="#000" />
+
+            <LinearLayout
+                android:id="@+id/user_profile_linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/user_profile_mail"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/user_profile_linearLayout_images"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingRight="3dp"
+                    android:text="0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/user_profile_linearLayout_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/photoUpload"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/profile_card1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            app:cardBackgroundColor="?attr/colorButtonNormal"
+            app:cardCornerRadius="@dimen/cardCornerRadius">
+
+            <TextView
+                android:id="@+id/profile_card_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ResoursesNotFound" />
+        </android.support.v7.widget.CardView>
 
     </RelativeLayout>
 </ScrollView>

@@ -2,6 +2,7 @@ package com.example.lv999k.analizapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ public class Signup extends AppCompatActivity {
         signupBtn.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(Signup.this,
-                R.style.AnalizapTheme);
+                R.style.AnalizapTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creando cuenta...");
         progressDialog.show();
@@ -107,6 +108,7 @@ public class Signup extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("token", token);
             Toast.makeText(getBaseContext(), "Se registro el usuario con exito", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Signup.this, Profile.class));
             finish();
         } catch (JSONException e) {
             e.printStackTrace();

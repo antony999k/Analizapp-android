@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import java.util.Map;
 public class Profile extends AppCompatActivity {
 
     TextView user_profile_name, user_profile_mail;
+    ProgressBar user_profile_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,32 @@ public class Profile extends AppCompatActivity {
 
         user_profile_name = (TextView) findViewById(R.id.user_profile_name);
         user_profile_mail = (TextView) findViewById(R.id.user_profile_mail);
+        user_profile_loading = (ProgressBar)findViewById(R.id.user_profile_loading);
 
+        SharedPreferences pref = getSharedPreferences("user",Context.MODE_PRIVATE);
+        if(pref.contains("nombre") && pref.contains("correo") && pref.contains("apellido")){
+            final String nombre = pref.getString("nombre", "") + " " + pref.getString("apellido", "");
+            final String correo = pref.getString("correo", "");
+            //Revisa si el token no esta vacio o es diferente de nulo
+            if((!nombre.isEmpty() || nombre != null) && (!correo.isEmpty() || correo != null)){
+                user_profile_name.setText(nombre);
+                user_profile_mail.setText(correo);
+            }else{
+                profileQuery();
+            }
+        }else{
+            profileQuery();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Profile.this, Principal.class));
+        finish();
+    }
+
+    public void profileQuery(){
+        user_profile_loading.setVisibility(View.VISIBLE);
         RequestQueue queue = Volley.newRequestQueue(this);
         //TODO: Cambiar por ruta de producción
         String url = "http://138.68.53.94/user/me";
@@ -49,9 +77,12 @@ public class Profile extends AppCompatActivity {
                 // response
                 Log.d("response", String.valueOf(response));
                 try {
+                    user_profile_loading.setVisibility(View.GONE);
                     String nombreCompleto = response.getString("nombre") + " " + response.getString("apellido");
                     user_profile_name.setText(nombreCompleto);
                     user_profile_mail.setText(response.getString("correo"));
+                    saveUserData(response);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -79,5 +110,18 @@ public class Profile extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(postRequest);
+    }
+
+    public void saveUserData(JSONObject resp){
+        SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        try {
+            editor.putString("nombre", resp.getString("nombre"));
+            editor.putString("apellido", resp.getString("apellido"));
+            editor.putString("correo", resp.getString("correo"));
+            editor.commit();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -12,4 +12,8 @@
     <string name="NotAccount">¿No tienes cuenta? Registrate</string>
     <string name="ImageProfileDescription">Imagen de usuario</string>
     <string name="imageBgDescription">Imagen de fondo</string>
+    <string name="ResoursesNotFound">No hay imágenes</string>
+    <string name="photoUpload">fotos subidas</string>
+    <string name="greeting">Bienvenido</string>
+    <string name="choose">Por favor escoge</string>
 </resources>

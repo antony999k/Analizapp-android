@@ -12,4 +12,8 @@
     <string name="NotAccount">You don´t hava account? signup</string>
     <string name="ImageProfileDescription">Avatar Picrure</string>
     <string name="imageBgDescription">Background Picture</string>
+    <string name="ResoursesNotFound">There is no images</string>
+    <string name="photoUpload">photos uploaded</string>
+    <string name="greeting">Welcome</string>
+    <string name="choose">Please choose...</string>
 </resources>
