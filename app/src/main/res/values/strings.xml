@@ -19,4 +19,16 @@
 
     <string name="Open">Open</string>
     <string name="Close">Close</string>
+    <string name="Cancel">Cancel</string>
+
+    <!-- Menu strings -->
+    <string name="Profile">Profile</string>
+    <string name="Analytics" translatable="false">Analytics</string>
+    <string name="Settings">Settings</string>
+    <string name="AboutUs">About Us</string>
+    <string name="Logout">Log out</string>
+
+    <!-- Alert dialog -->
+    <string name="AlertTitleImportant">Important</string>
+    <string name="AlertLogoutMessage">Are you sure you want to log out?</string>
 </resources>

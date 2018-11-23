@@ -18,4 +18,11 @@
     <string name="choose">Por favor escoge</string>
     <string name="Open">Abrir</string>
     <string name="Close">Cerrar</string>
+    <string name="Profile">Perfil</string>
+    <string name="Settings">Configuración</string>
+    <string name="AboutUs">Nosotros</string>
+    <string name="Logout">Cerrar Sesión</string>
+    <string name="AlertTitleImportant">Importante</string>
+    <string name="AlertLogoutMessage">¿Estas seguro que quieres cerrar sesión?</string>
+    <string name="Cancel">Cancelar</string>
 </resources>

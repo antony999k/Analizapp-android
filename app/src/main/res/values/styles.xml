@@ -34,5 +34,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AlertDialogLogout" parent="Theme.AppCompat.Light.Dialog.Alert">
+    </style>
 
 </resources>

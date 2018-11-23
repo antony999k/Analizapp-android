@@ -1,15 +1,20 @@
 package com.example.lv999k.analizapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,14 +45,20 @@ public class Principal extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch(id) {
-                    case R.id.account:
-                        Toast.makeText(Principal.this, "My Account",Toast.LENGTH_SHORT).show();
+                    case R.id.item_profile:
+                        startActivity(new Intent(Principal.this, Profile.class));
                         break;
-                    case R.id.settings:
+                    case R.id.item_analytics:
+                        Toast.makeText(Principal.this, "Analytics",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_settings:
                         Toast.makeText(Principal.this, "Settings",Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.mycart:
-                        Toast.makeText(Principal.this, "My Cart",Toast.LENGTH_SHORT).show();
+                    case R.id.item_about_us:
+                        Toast.makeText(Principal.this, "About us",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_logout:
+                        logOutAlertDialog();
                         break;
                     default:
                         break;
@@ -71,6 +82,22 @@ public class Principal extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    public void logOutAlertDialog(){
+        AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(this, R.style.AlertDialogLogout);
+        alertaLogOut.setTitle(R.string.AlertTitleImportant);
+        alertaLogOut.setMessage(R.string.AlertLogoutMessage);
+        alertaLogOut.setCancelable(false);
+        alertaLogOut.setPositiveButton(R.string.Logout, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialogo1, int id) {
+                logOut();
+            }
+        });
+        alertaLogOut.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {public void onClick(DialogInterface dialogo1, int id) {}});
+
+        alertaLogOut.show();
+    }
+
     public void logOut(){
         SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -78,6 +105,7 @@ public class Principal extends AppCompatActivity {
         SharedPreferences prefs2 = getSharedPreferences("user", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor2 = prefs2.edit();
         editor2.clear().commit();
+        startActivity(new Intent(Principal.this, Login.class));
     }
 
 }
