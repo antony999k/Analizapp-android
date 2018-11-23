@@ -19,7 +19,7 @@ public class Launcher extends AppCompatActivity {
             final String token = pref.getString("token", "");
             //Revisa si el token no esta vacio o es diferente de nulo
             if(!token.isEmpty() || token != null){
-                startActivity(new Intent(Launcher.this, Profile.class));
+                startActivity(new Intent(Launcher.this, Principal.class));
                 finish();
             }else{
                 startActivity(new Intent(Launcher.this, Login.class));

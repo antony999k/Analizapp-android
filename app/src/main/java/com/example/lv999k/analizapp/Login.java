@@ -109,7 +109,7 @@ public class Login extends AppCompatActivity {
             SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("token", token).commit();
-            startActivity(new Intent(Login.this, Profile.class));
+            startActivity(new Intent(Login.this, Principal.class));
             finish();
         } catch (JSONException e) {
             e.printStackTrace();

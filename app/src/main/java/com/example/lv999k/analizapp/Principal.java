@@ -4,11 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -17,11 +14,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
+import com.example.lv999k.analizapp.fragments.HomeFragment;
+import com.example.lv999k.analizapp.fragments.SettingsFragment;
 
 public class Principal extends AppCompatActivity {
 
@@ -44,6 +41,7 @@ public class Principal extends AppCompatActivity {
 
         navigationView = (NavigationView)findViewById(R.id.nv);
         setupNavigationDraweContent(navigationView);
+        setFragment(0);
 
     }
 
@@ -67,7 +65,8 @@ public class Principal extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id) {
                     case R.id.item_home:
-                        Toast.makeText(Principal.this, "Home",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Principal.this, "Home",Toast.LENGTH_SHORT).show();
+                        item.setChecked(true);
                         setFragment(0);
                         drawerLayout.closeDrawers();
                         break;
@@ -76,16 +75,17 @@ public class Principal extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item_analytics:
-                        Toast.makeText(Principal.this, "Analytics",Toast.LENGTH_SHORT).show();
+                        item.setChecked(true);
                         setFragment(1);
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item_settings:
-                        Toast.makeText(Principal.this, "Settings",Toast.LENGTH_SHORT).show();
+                        item.setChecked(true);
                         setFragment(2);
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item_about_us:
+                        item.setChecked(true);
                         Toast.makeText(Principal.this, "About us",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_logout:

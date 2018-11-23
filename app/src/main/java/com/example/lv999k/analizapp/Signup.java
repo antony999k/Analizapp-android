@@ -108,7 +108,7 @@ public class Signup extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("token", token);
             Toast.makeText(getBaseContext(), "Se registro el usuario con exito", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Signup.this, Profile.class));
+            startActivity(new Intent(Signup.this, Principal.class));
             finish();
         } catch (JSONException e) {
             e.printStackTrace();
