@@ -23,7 +23,7 @@ import com.example.lv999k.analizapp.fragments.SettingsFragment;
 public class Principal extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+    //private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
 
     @Override
@@ -32,26 +32,26 @@ public class Principal extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.Open, R.string.Close);
+        //actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.Open, R.string.Close);
 
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+        //drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        //actionBarDrawerToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView = (NavigationView)findViewById(R.id.nv);
         setupNavigationDraweContent(navigationView);
         setFragment(0);
 
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     public void onBackPressed() {
         // disable going back to the MainActivity

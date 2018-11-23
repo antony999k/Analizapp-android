@@ -106,7 +106,7 @@ public class Signup extends AppCompatActivity {
             String token = resp.getString("token");
             SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("token", token);
+            editor.putString("token", token).commit();
             Toast.makeText(getBaseContext(), "Se registro el usuario con exito", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Signup.this, Principal.class));
             finish();
