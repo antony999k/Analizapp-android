@@ -25,4 +25,5 @@
     <string name="AlertTitleImportant">Importante</string>
     <string name="AlertLogoutMessage">¿Estas seguro que quieres cerrar sesión?</string>
     <string name="Cancel">Cancelar</string>
+    <string name="Home">Inicio</string>
 </resources>

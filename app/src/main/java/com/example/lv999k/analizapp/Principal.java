@@ -5,54 +5,85 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class Principal extends AppCompatActivity {
 
-    private DrawerLayout dl;
-    private ActionBarDrawerToggle t;
-    private NavigationView nv;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        dl = (DrawerLayout)findViewById(R.id.drawer_layout);
-        t = new ActionBarDrawerToggle(this, dl,R.string.Open, R.string.Close);
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.Open, R.string.Close);
 
-        dl.addDrawerListener(t);
-        t.syncState();
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nv = (NavigationView)findViewById(R.id.nv);
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView = (NavigationView)findViewById(R.id.nv);
+        setupNavigationDraweContent(navigationView);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // disable going back to the MainActivity
+        moveTaskToBack(true);
+    }
+
+    public void setupNavigationDraweContent(NavigationView navigationView){
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch(id) {
+                    case R.id.item_home:
+                        Toast.makeText(Principal.this, "Home",Toast.LENGTH_SHORT).show();
+                        setFragment(0);
+                        drawerLayout.closeDrawers();
+                        break;
                     case R.id.item_profile:
                         startActivity(new Intent(Principal.this, Profile.class));
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.item_analytics:
                         Toast.makeText(Principal.this, "Analytics",Toast.LENGTH_SHORT).show();
+                        setFragment(1);
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.item_settings:
                         Toast.makeText(Principal.this, "Settings",Toast.LENGTH_SHORT).show();
+                        setFragment(2);
+                        drawerLayout.closeDrawers();
                         break;
                     case R.id.item_about_us:
                         Toast.makeText(Principal.this, "About us",Toast.LENGTH_SHORT).show();
@@ -66,20 +97,34 @@ public class Principal extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(t.onOptionsItemSelected(item))
-            return true;
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        // disable going back to the MainActivity
-        moveTaskToBack(true);
+    public void setFragment(int position){
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        switch (position){
+            case 0:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                HomeFragment homeFragment = new HomeFragment();
+                fragmentTransaction.replace(R.id.fragment, homeFragment);
+                fragmentTransaction.commit();
+                break;
+            case 1:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                AnalyticsFragment analyticsFragment = new AnalyticsFragment();
+                fragmentTransaction.replace(R.id.fragment, analyticsFragment);
+                fragmentTransaction.commit();
+                break;
+            case 2:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                SettingsFragment settingsFragment = new SettingsFragment();
+                fragmentTransaction.replace(R.id.fragment, settingsFragment);
+                fragmentTransaction.commit();
+                break;
+        }
     }
 
     public void logOutAlertDialog(){

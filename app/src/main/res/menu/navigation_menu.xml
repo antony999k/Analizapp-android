@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/item_profile"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/Profile"/>
-    <item android:id="@+id/item_analytics"
-        android:icon="@drawable/ic_chart"
-        android:title="@string/Analytics"/>
-    <item android:id="@+id/item_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/Settings"/>
-    <item android:id="@+id/item_about_us"
-        android:icon="@drawable/ic_about"
-        android:title="@string/AboutUs"/>
-    <item android:id="@+id/item_logout"
-        android:icon="@drawable/ic_power"
-        android:title="@string/Logout"/>
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/item_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/Home"/>
+        <item android:id="@+id/item_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/Profile"/>
+        <item android:id="@+id/item_analytics"
+            android:icon="@drawable/ic_chart"
+            android:title="@string/Analytics"/>
+        <item android:id="@+id/item_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/Settings"/>
+        <item android:id="@+id/item_about_us"
+            android:icon="@drawable/ic_about"
+            android:title="@string/AboutUs"/>
+        <item android:id="@+id/item_logout"
+            android:icon="@drawable/ic_power"
+            android:title="@string/Logout"/>
+    </group>
 </menu>
