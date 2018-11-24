@@ -13,45 +13,61 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
 import com.example.lv999k.analizapp.fragments.HomeFragment;
 import com.example.lv999k.analizapp.fragments.SettingsFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Principal extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    //private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
+    //Texto de nombre de usuario
+    TextView principal_greeting_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        //actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.Open, R.string.Close);
-
-        //drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        //actionBarDrawerToggle.syncState();
-
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.Open, R.string.Close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         navigationView = (NavigationView)findViewById(R.id.nv);
         setupNavigationDraweContent(navigationView);
         setFragment(0);
 
+        //Start access data
+        //principal_greeting_name = (TextView)findViewById(R.id.principal_greeting_name);
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
-            return true;
-        return super.onOptionsItemSelected(item);
-    }
-*/
+
     @Override
     public void onBackPressed() {
         // disable going back to the MainActivity

@@ -3,6 +3,8 @@
     package="com.example.lv999k.analizapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +25,10 @@
         <activity android:name=".Signup" />
         <activity android:name=".Profile" android:theme="@style/AnalizapThemeNoTitle" />
         <activity android:name=".Material" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
