@@ -3,9 +3,9 @@
     <string name="Name" translatable="false">Nombre</string>
     <string name="LastName">Apellido</string>
     <string name="Mail">Correo</string>
-    <string name="SignIn">Registate</string>
+    <string name="SignIn">REGISTRATE</string>
     <string name="Terms">Al crear tu cuneta estas de acuerdo con nuestros términos y condiciones</string>
-    <string name="Login">Ingresar</string>
+    <string name="Login">INGRESAR</string>
     <string name="passwordHint">Contraseña</string>
     <string name="mailHint">Usuario o Correo</string>
     <string name="AlreadyHaveAccount">¿Ya tienes una cuenta? Ingresa Aquí</string>

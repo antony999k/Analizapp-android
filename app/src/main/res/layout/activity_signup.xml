@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/globalPadding"
     tools:context=".Signup">
 
     <LinearLayout
@@ -13,64 +12,80 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/analizapp_icon" />
 
-        <EditText
-            android:id="@+id/name"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/Name"
-            android:inputType="textPersonName" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/lastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/LastName"
-            android:inputType="textPersonName" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/globalPadding"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/Mail"
-            android:inputType="textEmailAddress" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/analizapp_icon" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/passwordHint"
-            android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/LastName"
+                    android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/loginLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/AlreadyHaveAccount"
-            android:onClick="loginLink"/>
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/Mail"
+                    android:inputType="textEmailAddress" />
 
-        <TextView
-            android:id="@+id/termsLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Terms" />
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/passwordHint"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/Name"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/termsLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Terms" />
+
+                <TextView
+                    android:id="@+id/loginLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="loginLink"
+                    android:text="@string/AlreadyHaveAccount" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/globalPadding"
         android:orientation="vertical">
         <Button
             android:id="@+id/signupBtn"
