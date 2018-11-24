@@ -8,37 +8,60 @@
     android:padding="@dimen/globalPadding"
     tools:context=".Login">
 
-    <EditText
-        android:id="@+id/email"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:hint="Correo"
-        android:inputType="textEmailAddress" />
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:hint="@string/passwordHint"
-        android:inputType="textPassword" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@drawable/analizapp_icon" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="@string/Login"
-        android:onClick="login"/>
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:ems="10"
+            android:hint="Correo"
+            android:inputType="textEmailAddress" />
 
-    <TextView
-        android:id="@+id/crearCuenta"
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:ems="10"
+            android:hint="@string/passwordHint"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/crearCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="signupLink"
+            android:text="@string/NotAccount" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="signupLink"
-        android:text="@string/NotAccount" />
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/Login"
+            style="@style/final_btn_yellow"
+            android:onClick="login"/>
+    </LinearLayout>
 
 </LinearLayout>

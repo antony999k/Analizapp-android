@@ -8,55 +8,78 @@
     android:padding="@dimen/globalPadding"
     tools:context=".Signup">
 
-    <EditText
-        android:id="@+id/name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/Name"
-        android:inputType="textPersonName" />
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@drawable/analizapp_icon" />
 
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/LastName"
-        android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/Name"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/Mail"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/LastName"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/passwordHint"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/Mail"
+            android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/signupBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/SignIn"
-        android:onClick="signup"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/passwordHint"
+            android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/loginLink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/AlreadyHaveAccount"
-        android:onClick="loginLink"/>
+        <TextView
+            android:id="@+id/loginLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/AlreadyHaveAccount"
+            android:onClick="loginLink"/>
 
-    <TextView
-        android:id="@+id/termsLink"
+        <TextView
+            android:id="@+id/termsLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Terms" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Terms" />
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/signupBtn"
+            style="@style/final_btn_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/SignIn"
+            android:onClick="signup"/>
+    </LinearLayout>
 </LinearLayout>
