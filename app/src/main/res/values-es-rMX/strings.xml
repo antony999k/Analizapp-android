@@ -29,4 +29,5 @@
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <string name="TakePicture">Tomar Foto</string>
     <string name="UploadPicture">Subir Foto</string>
+    <string name="Vesion">Versión</string>
 </resources>
