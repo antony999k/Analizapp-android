@@ -1,14 +1,22 @@
 package com.example.lv999k.analizapp.fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +41,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -41,6 +51,11 @@ public class HomeFragment extends Fragment {
     TextView principal_greeting_name;
     ProgressBar home_fragment_loading;
     RelativeLayout layout_header_text;
+    //Botones de Foto y Galria
+    ImageButton home_btn_take_picture;
+    ImageButton home_btn_gallery;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,6 +68,9 @@ public class HomeFragment extends Fragment {
         principal_greeting_name = (TextView)view.findViewById(R.id.principal_greeting_name);
         home_fragment_loading = (ProgressBar)view.findViewById(R.id.home_fragment_loading);
         layout_header_text = (RelativeLayout) view.findViewById(R.id.layout_header_text);
+        //Declaración de botones
+        home_btn_take_picture = (ImageButton) view.findViewById(R.id.home_btn_take_picture);
+        home_btn_gallery = (ImageButton) view.findViewById(R.id.home_btn_gallery);
 
         SharedPreferences pref = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         if(pref.contains("nombre") && pref.contains("correo") && pref.contains("apellido")){
@@ -71,8 +89,31 @@ public class HomeFragment extends Fragment {
             layout_header_text.setVisibility(View.GONE);
             profileQuery();
         }
+
+        home_btn_take_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    //home_btn_take_picture.setEnabled(false);
+                    ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                }
+
+                dispatchTakePictureIntent();
+            }
+        });
+
+        home_btn_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, 1);
+            }
+        });
+
         return view;
     }
+
 
     public void profileQuery(){
         home_fragment_loading.setVisibility(View.VISIBLE);
@@ -134,6 +175,13 @@ public class HomeFragment extends Fragment {
             editor.commit();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
