@@ -65,8 +65,8 @@ public class Profile extends AppCompatActivity {
     public void profileQuery(){
         user_profile_loading.setVisibility(View.VISIBLE);
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Cambiar por ruta de producción
-        String url = "http://138.68.53.94/user/me";
+
+        String url = Constants.USERS_ME;
 
         SharedPreferences pref = getSharedPreferences("auth",Context.MODE_PRIVATE);
         final String token = pref.getString("token", "");

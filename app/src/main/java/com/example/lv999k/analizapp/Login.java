@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.lv999k.analizapp.Constants;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,8 +71,8 @@ public class Login extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Cambiar por ruta de producción
-        String url = "http://138.68.53.94/user/login";
+
+        String url = Constants.USERS_LOGIN;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, json,new Response.Listener<JSONObject>() {
                     @Override

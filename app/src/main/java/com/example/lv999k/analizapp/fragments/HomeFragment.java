@@ -32,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lv999k.analizapp.Constants;
 import com.example.lv999k.analizapp.Login;
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.Profile;
@@ -121,8 +122,7 @@ public class HomeFragment extends Fragment {
     public void profileQuery(){
         home_fragment_loading.setVisibility(View.VISIBLE);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        //TODO: Cambiar por ruta de producción
-        String url = "http://138.68.53.94/user/me";
+        String url = Constants.USERS_ME;
 
         SharedPreferences pref = getActivity().getSharedPreferences("auth",Context.MODE_PRIVATE);
         final String token = pref.getString("token", "");

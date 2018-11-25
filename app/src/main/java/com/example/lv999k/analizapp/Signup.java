@@ -72,8 +72,8 @@ public class Signup extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: Cambiar por ruta de producción
-        String url = "http://138.68.53.94/user";
+
+        String url = Constants.USERS_NEW;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, json,new Response.Listener<JSONObject>() {
             @Override
