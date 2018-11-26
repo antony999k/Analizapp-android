@@ -10,10 +10,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,18 +34,35 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lv999k.analizapp.ApiService;
 import com.example.lv999k.analizapp.Constants;
 import com.example.lv999k.analizapp.Login;
+import com.example.lv999k.analizapp.Metal;
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.Profile;
 import com.example.lv999k.analizapp.R;
+import com.example.lv999k.analizapp.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+
+
+
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,13 +70,14 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
     TextView principal_greeting_name;
     ProgressBar home_fragment_loading;
     RelativeLayout layout_header_text;
     //Botones de Foto y Galria
     ImageButton home_btn_take_picture;
     ImageButton home_btn_gallery;
+
+    ApiService apiService;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -68,6 +88,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         //Se declaran componentes de la vista
         principal_greeting_name = (TextView)view.findViewById(R.id.principal_greeting_name);
         home_fragment_loading = (ProgressBar)view.findViewById(R.id.home_fragment_loading);
@@ -75,6 +96,10 @@ public class HomeFragment extends Fragment {
         //Declaración de botones
         home_btn_take_picture = (ImageButton) view.findViewById(R.id.home_btn_take_picture);
         home_btn_gallery = (ImageButton) view.findViewById(R.id.home_btn_gallery);
+
+        Principal principal = (Principal) this.getActivity();
+        apiService = principal.apiService;
+
 
         SharedPreferences pref = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         if(pref.contains("nombre") && pref.contains("correo") && pref.contains("apellido")){
@@ -109,9 +134,10 @@ public class HomeFragment extends Fragment {
         home_btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, 1);
+//                photoPickerIntent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+                startActivityForResult(Intent.createChooser(photoPickerIntent, "Select Picture"), 1);
             }
         });
 
@@ -191,21 +217,48 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            if (resultCode == Activity.RESULT_OK) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+            try{
                 Uri selectedImage = data.getData();
+                File file = new File(getRealPath(selectedImage));
+                RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(selectedImage)), file);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-                String filePath = getPath(selectedImage);
-                String file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
-                //TODO mandar ruta/image (filePath) via http
+                //Ejemplo creacion de metal
+                //Metal metal = new Metal(null , "Nuevo Metal", "Desde android");
+                //Call<ResponseBody> call = apiService.newMetal(Session.getSessionID(getActivity()), metal);
 
-                if (file_extn.equals("img") || file_extn.equals("jpg") || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
-                    //FINE
-                } else {
-                    //NOT IN REQUIRED FORMAT
-                }
+                Call<ResponseBody> call = apiService.analyzeImage(Session.getSessionID(getActivity()), body);
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                        if(response.isSuccessful()){
+                            // Paso
+                        }
+                        else{
+                            // No paso
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("Upload error:", t.getMessage());
+                    }
+                });
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
+    }
+
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+
     }
 
     public String getPath(Uri uri) {
@@ -216,6 +269,26 @@ public class HomeFragment extends Fragment {
         String imagePath = cursor.getString(column_index);
         Toast.makeText(getActivity().getBaseContext(), imagePath, Toast.LENGTH_LONG).show();
         return cursor.getString(column_index);
+    }
+
+    public String getRealPath(Uri uri){
+        // Will return "image:x*"
+        String wholeID = DocumentsContract.getDocumentId(uri);
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+        String[] column = { MediaStore.Images.Media.DATA };
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+        Cursor cursor = getActivity().getContentResolver().
+                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        column, sel, new String[]{ id }, null);
+        String filePath = "";
+        int columnIndex = cursor.getColumnIndex(column[0]);
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+        return filePath;
     }
 
 }

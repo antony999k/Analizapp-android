@@ -39,12 +39,26 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Principal extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     //Texto de nombre de usuario
     TextView principal_greeting_name;
+
+    public static final String API_URL = "http://192.168.15.21:3500/";
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(API_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    public ApiService apiService;
+    public String jwtToken;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +67,8 @@ public class Principal extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        apiService = retrofit.create(ApiService.class);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
