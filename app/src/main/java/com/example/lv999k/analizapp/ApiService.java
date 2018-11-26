@@ -1,5 +1,8 @@
 package com.example.lv999k.analizapp;
 
+import com.example.lv999k.analizapp.objects.Experiment;
+import com.example.lv999k.analizapp.objects.Metal;
+
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

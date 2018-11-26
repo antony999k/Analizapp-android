@@ -35,21 +35,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lv999k.analizapp.ApiService;
-import com.example.lv999k.analizapp.Constants;
+import com.example.lv999k.analizapp.objects.Constants;
 import com.example.lv999k.analizapp.Login;
-import com.example.lv999k.analizapp.Metal;
 import com.example.lv999k.analizapp.Principal;
-import com.example.lv999k.analizapp.Profile;
 import com.example.lv999k.analizapp.R;
-import com.example.lv999k.analizapp.Session;
+import com.example.lv999k.analizapp.objects.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,11 +56,6 @@ import okhttp3.ResponseBody;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-
-
-
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.

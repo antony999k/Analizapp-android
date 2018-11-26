@@ -1,12 +1,13 @@
-package com.example.lv999k.analizapp;
+package com.example.lv999k.analizapp.objects;
 
 /**
  * Created by javiercuriel on 11/25/18.
  */
 
 public class Constants {
-    //public static final String SERVER = "http://138.68.53.94";
-    public static final String SERVER = "http://192.168.15.21:3500";
+    public static final String SERVER = "http://138.68.53.94";
+    //public static final String SERVER = "http://192.168.15.21:3500";
+
     // User
     public static final String USERS_ALL = SERVER + "/users";
     public static final String USERS_GET = SERVER + "/user/";

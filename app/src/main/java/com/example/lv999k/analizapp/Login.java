@@ -25,10 +25,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.lv999k.analizapp.Constants;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.lv999k.analizapp.objects.Constants;
 
 public class Login extends AppCompatActivity {
 
