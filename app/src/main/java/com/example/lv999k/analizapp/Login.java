@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -72,7 +74,6 @@ public class Login extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(this);
-
         String url = Constants.USERS_LOGIN;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, json,new Response.Listener<JSONObject>() {
@@ -88,12 +89,12 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley", error.toString());
-                        onLoginFailed();
+                        onLoginFailed(error);
                         progressDialog.dismiss();
                     }
                 });
         postRequest.setRetryPolicy(new DefaultRetryPolicy(
-                30000,
+                5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
@@ -119,8 +120,12 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "El nombre de usuario o la contraseña no coincide con nuestros registros. Intenta de nuevo", Toast.LENGTH_LONG).show();
+    public void onLoginFailed(VolleyError error) {
+        if(error instanceof TimeoutError || error instanceof NoConnectionError){
+            Toast.makeText(getBaseContext(), "Error al conectarse con el servidor", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getBaseContext(), "El nombre de usuario o la contraseña no coincide con nuestros registros. Intenta de nuevo", Toast.LENGTH_LONG).show();
+        }
         loginBtn.setEnabled(true);
     }
 
