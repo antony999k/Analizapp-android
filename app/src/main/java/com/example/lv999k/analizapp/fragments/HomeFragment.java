@@ -39,7 +39,7 @@ import com.example.lv999k.analizapp.objects.Constants;
 import com.example.lv999k.analizapp.Login;
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
-import com.example.lv999k.analizapp.objects.Session;
+import com.example.lv999k.analizapp.services.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
