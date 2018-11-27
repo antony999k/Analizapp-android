@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.utils.Constants;
 
 import org.json.JSONException;
@@ -40,6 +41,7 @@ import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
+    ApiService apiService;
     TextView user_profile_name, user_profile_mail;
     ProgressBar user_profile_loading;
 
@@ -52,10 +54,13 @@ public class Profile extends AppCompatActivity {
         user_profile_mail = (TextView) findViewById(R.id.user_profile_mail);
         user_profile_loading = (ProgressBar)findViewById(R.id.user_profile_loading);
 
+        String imgUrl;
+
         SharedPreferences pref = getSharedPreferences("user",Context.MODE_PRIVATE);
         if(pref.contains("nombre") && pref.contains("correo") && pref.contains("apellido")){
             final String nombre = pref.getString("nombre", "") + " " + pref.getString("apellido", "");
             final String correo = pref.getString("correo", "");
+            imgUrl = pref.getString("img", "");
             //Revisa si el token no esta vacio o es diferente de nulo
             if((!nombre.isEmpty() || nombre != null) && (!correo.isEmpty() || correo != null)){
                 user_profile_name.setText(nombre);
@@ -66,6 +71,9 @@ public class Profile extends AppCompatActivity {
         }else{
             profileQuery();
         }
+
+
+        saveImage(imgUrl);
     }
 
     @Override
