@@ -16,6 +16,7 @@
     <string name="photoUpload">photos uploaded</string>
     <string name="greeting">Welcome</string>
     <string name="choose">Please choose...</string>
+    <string name="Description">Description</string>
 
     <string name="Open">Open</string>
     <string name="Close">Close</string>
@@ -41,4 +42,10 @@
 
     <!-- Settings -->
     <string name="Vesion">Vesion</string>
+    <string name="Experiment">Experiment</string>
+    <string name="Metal" translatable="false">Metal</string>
+    <string name="Degrees">Degrees</string>
+    <string name="SAVE">SAVE</string>
+    <string name="AddImage">Add image</string>
+
 </resources>

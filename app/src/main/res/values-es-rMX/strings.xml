@@ -31,4 +31,8 @@
     <string name="UploadPicture">Subir Foto</string>
     <string name="Vesion">Versión</string>
     <string name="Metals">Metales</string>
+    <string name="Description">Descripción</string>
+    <string name="Experiment">Experimento</string>
+    <string name="Degrees">Grados</string>
+    <string name="SAVE">GUARDAR</string>
 </resources>

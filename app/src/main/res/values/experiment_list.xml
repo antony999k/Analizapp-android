@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="experiment_list">
+        <item>Exp1</item>
+        <item>Exp2</item>
+        <item>Exp3</item>
+        <item>Exp4</item>
+        <item>Exp5</item>
+        <item>Exp6</item>
+    </string-array>
+</resources>
