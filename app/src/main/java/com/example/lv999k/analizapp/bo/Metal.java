@@ -1,4 +1,4 @@
-package com.example.lv999k.analizapp;
+package com.example.lv999k.analizapp.bo;
 
 /**
  * Created by javiercuriel on 11/26/18.

@@ -34,10 +34,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.lv999k.analizapp.Services.ApiService;
-import com.example.lv999k.analizapp.Constants;
+import com.example.lv999k.analizapp.bo.Metal;
+import com.example.lv999k.analizapp.services.ApiService;
+
+
+import com.example.lv999k.analizapp.utils.Constants;
 import com.example.lv999k.analizapp.Login;
-import com.example.lv999k.analizapp.Metal;
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
 

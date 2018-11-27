@@ -1,4 +1,4 @@
-package com.example.lv999k.analizapp;
+package com.example.lv999k.analizapp.bo;
 
 import java.util.Date;
 

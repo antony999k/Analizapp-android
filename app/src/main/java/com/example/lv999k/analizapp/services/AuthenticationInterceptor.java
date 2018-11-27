@@ -1,4 +1,4 @@
-package com.example.lv999k.analizapp.Services;
+package com.example.lv999k.analizapp.services;
 
 import java.io.IOException;
 

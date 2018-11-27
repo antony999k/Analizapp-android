@@ -1,8 +1,8 @@
-package com.example.lv999k.analizapp.Services;
+package com.example.lv999k.analizapp.services;
 
 import android.text.TextUtils;
 
-import com.example.lv999k.analizapp.Constants;
+import com.example.lv999k.analizapp.utils.Constants;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

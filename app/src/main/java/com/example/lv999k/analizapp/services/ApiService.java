@@ -1,10 +1,7 @@
-package com.example.lv999k.analizapp.Services;
+package com.example.lv999k.analizapp.services;
 
-import com.example.lv999k.analizapp.Constants;
-import com.example.lv999k.analizapp.Experiment;
-import com.example.lv999k.analizapp.Metal;
-
-import java.util.List;
+import com.example.lv999k.analizapp.bo.Experiment;
+import com.example.lv999k.analizapp.bo.Metal;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -16,7 +13,6 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -47,7 +43,7 @@ public interface ApiService {
     @PUT("metal/update/{id}")
     Call<ResponseBody> updateMetal(@Path("id") Integer id ,@Body Metal metal);
     @DELETE("metal/delete/{id}")
-    Call<ResponseBody> deleteMetal(Path("id") Integer id);
+    Call<ResponseBody> deleteMetal(@Path("id") Integer id);
 
     // Experiments
     @GET("experiment/all")

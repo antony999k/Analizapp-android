@@ -18,17 +18,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lv999k.analizapp.Services.ApiService;
-import com.example.lv999k.analizapp.Services.ApiServiceGenerator;
+import com.example.lv999k.analizapp.services.ApiService;
+import com.example.lv999k.analizapp.services.ApiServiceGenerator;
 import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
 import com.example.lv999k.analizapp.fragments.HomeFragment;
 import com.example.lv999k.analizapp.fragments.SettingsFragment;
+import com.example.lv999k.analizapp.utils.Session;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Principal extends AppCompatActivity {
-
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     //Texto de nombre de usuario
@@ -160,7 +160,6 @@ public class Principal extends AppCompatActivity {
             }
         });
         alertaLogOut.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {public void onClick(DialogInterface dialogo1, int id) {}});
-
         alertaLogOut.show();
     }
 
