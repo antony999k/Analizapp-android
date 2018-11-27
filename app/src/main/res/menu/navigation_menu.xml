@@ -12,7 +12,7 @@
             android:title="@string/Analytics"/>
 
         <item android:id="@+id/item_metals"
-            android:icon="@drawable/ic_chart"
+            android:icon="@drawable/ic_steel"
             android:title="@string/Metals"/>
 
         <item android:id="@+id/item_settings"
