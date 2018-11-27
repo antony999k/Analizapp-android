@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f4f4f4"
     tools:context=".Profile">
 
     <RelativeLayout
@@ -102,17 +103,27 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/profile_card1"
+            style="@style/Widget.MaterialComponents.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_layout"
-            app:cardBackgroundColor="?attr/colorButtonNormal"
-            app:cardCornerRadius="@dimen/cardCornerRadius">
+            android:layout_marginLeft="@dimen/mtrl_card_spacing"
+            android:layout_marginTop="@dimen/mtrl_card_spacing"
+            android:layout_marginRight="@dimen/mtrl_card_spacing"
+            android:minHeight="200dp"
+            app:cardElevation="3dp"
+            app:cardMaxElevation="8dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="16dp">
 
             <TextView
                 android:id="@+id/profile_card_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ResoursesNotFound" />
+                android:text="@string/ResoursesNotFound"
+                android:textSize="21dp"
+                android:textStyle="bold" />
         </android.support.v7.widget.CardView>
 
     </RelativeLayout>

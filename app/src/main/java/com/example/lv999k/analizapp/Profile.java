@@ -3,13 +3,20 @@ package com.example.lv999k.analizapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.os.Environment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -24,6 +31,10 @@ import com.example.lv999k.analizapp.utils.Constants;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,9 +131,25 @@ public class Profile extends AppCompatActivity {
             editor.putString("nombre", resp.getString("nombre"));
             editor.putString("apellido", resp.getString("apellido"));
             editor.putString("correo", resp.getString("correo"));
+            editor.putString("img", resp.getString("img"));
             editor.commit();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void saveImage(Bitmap bitmap) {
+        File imagePath = new File(Environment.getExternalStorageDirectory() + "/image.png");
+
+        try {
+            FileOutputStream fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Log.e("GREC", e.getMessage(), e);
+        } catch (IOException e) {
+            Log.e("GREC", e.getMessage(), e);
         }
     }
 }
