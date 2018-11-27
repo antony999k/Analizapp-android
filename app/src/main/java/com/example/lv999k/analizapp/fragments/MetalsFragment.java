@@ -7,11 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
+import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.services.ApiService;
+import com.example.lv999k.analizapp.utils.CustomResponse;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,9 +35,10 @@ import retrofit2.Response;
  */
 public class MetalsFragment extends Fragment {
     ApiService apiService;
-    ExpandableListView expandableListView;
 
-    private OnFragmentInteractionListener mListener;
+    ListView metalList;
+
+//    private OnFragmentInteractionListener mListener;
 
     public MetalsFragment() {
         // Required empty public constructor
@@ -50,7 +58,9 @@ public class MetalsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_metals, container, false);
 
-        expandableListView = view.findViewById(R.id.metal_list);
+        metalList = view.findViewById(R.id.metal_list);
+
+
         loadMetals();
 
         return view;
@@ -58,33 +68,47 @@ public class MetalsFragment extends Fragment {
     }
 
     public void loadMetals(){
-        Call<ResponseBody> call = apiService.allMetals();
-
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<CustomResponse<Metal>> call = apiService.allMetals();
+        call.enqueue(new Callback<CustomResponse<Metal>>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<CustomResponse<Metal>> call, Response<CustomResponse<Metal>> response) {
                 if(response.isSuccessful()){
-
+                    setAdapter(response.body().getResults());
                 }
-                else{
-
-                }
+//                else{
+//
+//                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+            public void onFailure(Call<CustomResponse<Metal>> call, Throwable t) {
+                t.printStackTrace();
             }
         });
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+
+
+
+    public void setAdapter(List<Metal> list){
+        ArrayList<String> titles = new ArrayList<String>();
+
+        for(Metal metal: list){
+            titles.add(metal.getNombre());
         }
+        metalList.setAdapter(new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, titles));
+
+
     }
+
+//    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
 //    @Override
 //    public void onAttach(Context context) {
@@ -113,8 +137,8 @@ public class MetalsFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+//    public interface OnFragmentInteractionListener {
+//        // TODO: Update argument type and name
+//        void onFragmentInteraction(Uri uri);
+//    }
 }

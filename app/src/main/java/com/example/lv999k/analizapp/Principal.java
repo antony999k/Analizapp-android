@@ -93,19 +93,15 @@ public class Principal extends AppCompatActivity {
                 }
                 switch(id) {
                     case R.id.item_home:
-                        item.setChecked(true);
                         fragment = new HomeFragment();
                         break;
                     case R.id.item_analytics:
-                        item.setChecked(true);
                         fragment = new AnalyticsFragment();
                         break;
                     case R.id.item_settings:
-                        item.setChecked(true);
                         fragment = new SettingsFragment();
                         break;
                     case R.id.item_metals:
-                        item.setChecked(true);
                         fragment = new MetalsFragment();
                         drawerLayout.closeDrawers();
                         break;
@@ -113,6 +109,7 @@ public class Principal extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
                 }
+                item.setChecked(true);
                 setFragment(fragment);
                 drawerLayout.closeDrawers();
                 return true;
