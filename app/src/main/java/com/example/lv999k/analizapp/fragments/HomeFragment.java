@@ -90,8 +90,7 @@ public class HomeFragment extends Fragment {
         home_btn_take_picture = (ImageButton) view.findViewById(R.id.home_btn_take_picture);
         home_btn_gallery = (ImageButton) view.findViewById(R.id.home_btn_gallery);
 
-        Principal principal = (Principal) this.getActivity();
-        apiService = principal.apiService;
+        apiService = ((Principal) this.getActivity()).apiService;
 
 
         SharedPreferences pref = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);

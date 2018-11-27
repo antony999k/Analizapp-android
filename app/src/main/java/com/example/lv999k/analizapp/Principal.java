@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lv999k.analizapp.fragments.MetalsFragment;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.services.ApiServiceGenerator;
 import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
@@ -67,7 +69,7 @@ public class Principal extends AppCompatActivity {
 
         navigationView = (NavigationView)findViewById(R.id.nv);
         setupNavigationDraweContent(navigationView);
-        setFragment(0);
+        setFragment(new HomeFragment());
 
         //Start access data
         //principal_greeting_name = (TextView)findViewById(R.id.principal_greeting_name);
@@ -84,69 +86,60 @@ public class Principal extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
+                Fragment fragment = null;
+                if(id == R.id.item_logout){
+                    logOutAlertDialog();
+                    return true;
+                }
                 switch(id) {
                     case R.id.item_home:
-                        //Toast.makeText(Principal.this, "Home",Toast.LENGTH_SHORT).show();
                         item.setChecked(true);
-                        setFragment(0);
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.item_profile:
-                        startActivity(new Intent(Principal.this, Profile.class));
-                        drawerLayout.closeDrawers();
+                        fragment = new HomeFragment();
                         break;
                     case R.id.item_analytics:
                         item.setChecked(true);
-                        setFragment(1);
-                        drawerLayout.closeDrawers();
+                        fragment = new AnalyticsFragment();
                         break;
                     case R.id.item_settings:
                         item.setChecked(true);
-                        setFragment(2);
+                        fragment = new SettingsFragment();
+                        break;
+                    case R.id.item_metals:
+                        item.setChecked(true);
+                        fragment = new MetalsFragment();
                         drawerLayout.closeDrawers();
                         break;
-                    case R.id.item_about_us:
-                        item.setChecked(true);
-                        Toast.makeText(Principal.this, "About us",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.item_logout:
-                        logOutAlertDialog();
-                        break;
                     default:
-                        break;
+                        drawerLayout.closeDrawers();
+                        return true;
                 }
+                setFragment(fragment);
+                drawerLayout.closeDrawers();
                 return true;
             }
         });
     }
 
-    public void setFragment(int position){
+
+    //                    case R.id.item_profile:
+//                        startActivity(new Intent(Principal.this, Profile.class));
+//                        drawerLayout.closeDrawers();
+//                        break;
+
+    //                    case R.id.item_about_us:
+//                        item.setChecked(true);
+//                        Toast.makeText(Principal.this, "About us",Toast.LENGTH_SHORT).show();
+//                        break;
+
+    public void setFragment(Fragment fragment){
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
-        switch (position){
-            case 0:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                HomeFragment homeFragment = new HomeFragment();
-                fragmentTransaction.replace(R.id.fragment, homeFragment);
-                fragmentTransaction.commit();
-                break;
-            case 1:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                AnalyticsFragment analyticsFragment = new AnalyticsFragment();
-                fragmentTransaction.replace(R.id.fragment, analyticsFragment);
-                fragmentTransaction.commit();
-                break;
-            case 2:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                SettingsFragment settingsFragment = new SettingsFragment();
-                fragmentTransaction.replace(R.id.fragment, settingsFragment);
-                fragmentTransaction.commit();
-                break;
-        }
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment, fragment);
+        fragmentTransaction.commit();
     }
+
 
     public void logOutAlertDialog(){
         AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(this, R.style.AlertDialogLogout);

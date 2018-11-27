@@ -10,6 +10,11 @@
         <item android:id="@+id/item_analytics"
             android:icon="@drawable/ic_chart"
             android:title="@string/Analytics"/>
+
+        <item android:id="@+id/item_metals"
+            android:icon="@drawable/ic_chart"
+            android:title="@string/Metals"/>
+
         <item android:id="@+id/item_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/Settings"/>

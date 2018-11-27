@@ -25,6 +25,7 @@
     <string name="Home">Home</string>
     <string name="Profile">Profile</string>
     <string name="Analytics" translatable="false">Analytics</string>
+    <string name="Metals">Metals</string>
     <string name="Settings">Settings</string>
     <string name="AboutUs">About Us</string>
     <string name="Logout">Log out</string>

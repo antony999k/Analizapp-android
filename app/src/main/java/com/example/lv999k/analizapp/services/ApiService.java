@@ -3,6 +3,8 @@ package com.example.lv999k.analizapp.services;
 import com.example.lv999k.analizapp.bo.Experiment;
 import com.example.lv999k.analizapp.bo.Metal;
 
+import java.io.Serializable;
+
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
