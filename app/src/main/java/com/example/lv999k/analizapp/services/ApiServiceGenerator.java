@@ -24,6 +24,10 @@ public class ApiServiceGenerator {
                     .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
+//    private static Retrofit.Builder builder =
+//            new Retrofit.Builder()
+//                    .baseUrl(API_BASE_URL);
+
     private static Retrofit retrofit = builder.build();
 
     public static <S> S createService(Class<S> serviceClass) {

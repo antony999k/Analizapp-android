@@ -2,6 +2,7 @@ package com.example.lv999k.analizapp.services;
 
 import com.example.lv999k.analizapp.bo.Experiment;
 import com.example.lv999k.analizapp.bo.Metal;
+import com.example.lv999k.analizapp.utils.CustomResponse;
 
 import java.io.Serializable;
 
@@ -37,7 +38,7 @@ public interface ApiService {
 
     // Metals
     @GET("metal/all")
-    Call<ResponseBody> allMetals();
+    Call<CustomResponse<Metal>> allMetals();
     @GET("metal/get/{id}")
     Call<ResponseBody> getMetal(@Path("id") Integer id);
     @POST("metal/new")

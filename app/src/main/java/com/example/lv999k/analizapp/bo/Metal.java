@@ -9,6 +9,18 @@ public class Metal {
     String nombre;
     String descripcion;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
     public Metal(Integer id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
