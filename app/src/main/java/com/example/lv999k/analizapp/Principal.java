@@ -120,7 +120,7 @@ public class Principal extends AppCompatActivity {
             }
         });
     }
-    
+
 
     public void setFragment(Fragment fragment){
         FragmentManager fragmentManager;

@@ -73,7 +73,7 @@ public class Profile extends AppCompatActivity {
         }
 
 
-        saveImage(imgUrl);
+        //saveImage(imgUrl);
     }
 
     @Override
