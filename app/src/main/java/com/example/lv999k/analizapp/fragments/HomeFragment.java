@@ -34,22 +34,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.lv999k.analizapp.ApiService;
+import com.example.lv999k.analizapp.Services.ApiService;
 import com.example.lv999k.analizapp.Constants;
 import com.example.lv999k.analizapp.Login;
 import com.example.lv999k.analizapp.Metal;
 import com.example.lv999k.analizapp.Principal;
-import com.example.lv999k.analizapp.Profile;
 import com.example.lv999k.analizapp.R;
-import com.example.lv999k.analizapp.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,11 +56,6 @@ import okhttp3.ResponseBody;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-
-
-
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -225,10 +216,10 @@ public class HomeFragment extends Fragment {
                 MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
                 //Ejemplo creacion de metal
-                //Metal metal = new Metal(null , "Nuevo Metal", "Desde android");
-                //Call<ResponseBody> call = apiService.newMetal(Session.getSessionID(getActivity()), metal);
-
-                Call<ResponseBody> call = apiService.analyzeImage(Session.getSessionID(getActivity()), body);
+//                Metal metal = new Metal(null , "Nuevo Metal", "Desde android");
+//                Call<ResponseBody> call = apiService.newMetal(metal);
+//
+                Call<ResponseBody> call = apiService.analyzeImage(body);
 
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override

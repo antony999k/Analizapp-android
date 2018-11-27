@@ -14,30 +14,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.lv999k.analizapp.Services.ApiService;
+import com.example.lv999k.analizapp.Services.ApiServiceGenerator;
 import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
 import com.example.lv999k.analizapp.fragments.HomeFragment;
 import com.example.lv999k.analizapp.fragments.SettingsFragment;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -56,6 +41,8 @@ public class Principal extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+
+
     public ApiService apiService;
     public String jwtToken;
 
@@ -68,7 +55,9 @@ public class Principal extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        apiService = retrofit.create(ApiService.class);
+        apiService = ApiServiceGenerator.createService(ApiService.class, Session.getSessionID(this));
+
+//        apiService = retrofit.create(ApiService.class);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
