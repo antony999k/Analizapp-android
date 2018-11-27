@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,9 +76,9 @@ public class MetalsFragment extends Fragment {
                 if(response.isSuccessful()){
                     setAdapter(response.body().getResults());
                 }
-//                else{
-//
-//                }
+                else{
+                    Log.e("Response", "Error in response");
+                }
             }
 
             @Override
@@ -98,6 +99,7 @@ public class MetalsFragment extends Fragment {
         for(Metal metal: list){
             titles.add(metal.getNombre());
         }
+
         metalList.setAdapter(new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, titles));
 
 
