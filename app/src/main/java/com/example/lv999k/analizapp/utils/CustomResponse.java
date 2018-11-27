@@ -1,6 +1,5 @@
 package com.example.lv999k.analizapp.utils;
 
-import com.example.lv999k.analizapp.bo.Metal;
 
 import java.util.List;
 
