@@ -90,6 +90,10 @@ public class Principal extends AppCompatActivity {
                 if(id == R.id.item_logout){
                     logOutAlertDialog();
                     return true;
+                }else if(id == R.id.item_profile){
+                    startActivity(new Intent(Principal.this, Profile.class));
+                    drawerLayout.closeDrawers();
+                    return true;
                 }
                 switch(id) {
                     case R.id.item_home:
@@ -116,17 +120,7 @@ public class Principal extends AppCompatActivity {
             }
         });
     }
-
-
-    //                    case R.id.item_profile:
-//                        startActivity(new Intent(Principal.this, Profile.class));
-//                        drawerLayout.closeDrawers();
-//                        break;
-
-    //                    case R.id.item_about_us:
-//                        item.setChecked(true);
-//                        Toast.makeText(Principal.this, "About us",Toast.LENGTH_SHORT).show();
-//                        break;
+    
 
     public void setFragment(Fragment fragment){
         FragmentManager fragmentManager;
