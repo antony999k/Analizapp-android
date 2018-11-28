@@ -67,7 +67,12 @@ public class NewExperimentFragment extends Fragment {
     }
 
     public void postExperiment(Experiment exp){
-        Call<ResponseBody> call = apiService.newExperiment(exp);
+        if (!validateForm()) {
+            onNotValidateForm();
+            return;
+        }
+        
+        new_experiment_btn.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AnalizapTheme_Dark_Dialog);
@@ -75,6 +80,7 @@ public class NewExperimentFragment extends Fragment {
         progressDialog.setMessage("Creando Experimento...");
         progressDialog.show();
 
+        Call<ResponseBody> call = apiService.newExperiment(exp);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
@@ -94,6 +100,35 @@ public class NewExperimentFragment extends Fragment {
                 progressDialog.dismiss();
             }
         });
+    }
+
+
+    public boolean validateForm() {
+        boolean valid = true;
+
+        String expNameStr = experiment_name.getText().toString();
+        String expDescriptionStr = experiment_description.getText().toString();
+
+        if (expNameStr.isEmpty()) {
+            experiment_name.setError("Ingresa el nombre del experimento");
+            valid = false;
+        } else {
+            experiment_name.setError(null);
+        }
+
+        if (expDescriptionStr.isEmpty()) {
+            experiment_description.setError("Ingresa la descripción del experimento");
+            valid = false;
+        } else {
+            experiment_description.setError(null);
+        }
+
+        return valid;
+    }
+
+    public void onNotValidateForm(){
+        Toast.makeText(getActivity().getBaseContext(), "Ingresa todos los campos", Toast.LENGTH_LONG).show();
+        new_experiment_btn.setEnabled(true);
     }
 
 }
