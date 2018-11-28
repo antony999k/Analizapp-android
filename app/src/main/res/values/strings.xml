@@ -17,6 +17,9 @@
     <string name="greeting">Welcome</string>
     <string name="choose">Please choose...</string>
     <string name="Description">Description</string>
+    <string name="CreateMetal">Create metal</string>
+    <string name="NewMetal">New metal</string>
+
 
     <string name="Open">Open</string>
     <string name="Close">Close</string>
@@ -47,5 +50,11 @@
     <string name="Degrees">Degrees</string>
     <string name="SAVE">SAVE</string>
     <string name="AddImage">Add image</string>
+    <string name="MetalName">Metal Name</string>
+    <string name="MetalDescription">Metal Description</string>
+
+    <!-- Loading screens -->
+    <string name="Authenticating">Authenticating...</string>
+
 
 </resources>

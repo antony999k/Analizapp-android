@@ -1,18 +1,25 @@
 package com.example.lv999k.analizapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.lv999k.analizapp.Principal;
+import com.example.lv999k.analizapp.Profile;
 import com.example.lv999k.analizapp.R;
 import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.services.ApiService;
@@ -27,18 +34,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MetalsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MetalsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MetalsFragment extends Fragment {
     ApiService apiService;
 
     ListView metalList;
+    FloatingActionButton add_metal_btn;
 
 
     public MetalsFragment() {
@@ -61,8 +62,22 @@ public class MetalsFragment extends Fragment {
 
         metalList = view.findViewById(R.id.metal_list);
 
-
         loadMetals();
+
+        add_metal_btn = (FloatingActionButton) view.findViewById(R.id.add_metal_btn);
+        add_metal_btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Fragment fragment = new NewMetalFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
         return view;
 
@@ -100,5 +115,7 @@ public class MetalsFragment extends Fragment {
         metalList.setAdapter(new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, titles));
 
     }
+
+
 
 }
