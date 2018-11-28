@@ -18,7 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.lv999k.analizapp.fragments.ExperimentFragment;
 import com.example.lv999k.analizapp.fragments.MetalsFragment;
+import com.example.lv999k.analizapp.fragments.NewExperimentFragment;
 import com.example.lv999k.analizapp.fragments.ProfileFragment;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.services.ApiServiceGenerator;
@@ -85,11 +87,6 @@ public class Principal extends AppCompatActivity {
                     logOutAlertDialog();
                     return true;
                 }
-//                else if(id == R.id.item_profile){
-//                    startActivity(new Intent(Principal.this, Profile.class));
-//                    drawerLayout.closeDrawers();
-//                    return true;
-//                }
                 switch(id) {
                     case R.id.item_home:
                         fragment = new HomeFragment();
@@ -99,6 +96,9 @@ public class Principal extends AppCompatActivity {
                         break;
                     case R.id.item_metals:
                         fragment = new MetalsFragment();
+                        break;
+                    case R.id.item_experiments:
+                        fragment = new NewExperimentFragment();
                         break;
                     case R.id.item_profile:
                         fragment = new ProfileFragment();

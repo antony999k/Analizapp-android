@@ -12,6 +12,10 @@
             android:icon="@drawable/ic_steel"
             android:title="@string/Metals"/>
 
+        <item android:id="@+id/item_experiments"
+            android:icon="@drawable/ic_flask"
+            android:title="@string/Experiments"/>
+
         <item android:id="@+id/item_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/Settings"/>

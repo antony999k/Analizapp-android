@@ -45,4 +45,8 @@
     <string name="ExperimentDescription">Descripción de experimento</string>
     <string name="ExperimentUserid">Userid de experimento</string>
     <string name="Date">Fecha</string>
+    <string name="CreateExperiment">Crear Experimento</string>
+    <string name="Comments">Comentarios</string>
+    <string name="ImageAnalysis">Análisis de imágen</string>
+    <string name="Experiments">Experimentos</string>
 </resources>

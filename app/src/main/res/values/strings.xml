@@ -46,6 +46,7 @@
     <!-- Settings -->
     <string name="Vesion">Vesion</string>
     <string name="Experiment">Experiment</string>
+    <string name="Experiments">Experiments</string>
     <string name="Metal" translatable="false">Metal</string>
     <string name="Degrees">Degrees</string>
     <string name="SAVE">SAVE</string>
