@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/fragment_new_metal"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragments.NewMetalFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/globalPadding"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/metal_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/MetalName"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/metal_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/MetalDescription"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/globalPadding"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/signupBtn"
+            style="@style/final_btn_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/CreateMetal"
+            android:onClick="createMetal"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -35,4 +35,8 @@
     <string name="Experiment">Experimento</string>
     <string name="Degrees">Grados</string>
     <string name="SAVE">GUARDAR</string>
+    <string name="AddImage">Añadir imágen</string>
+    <string name="CreateMetal">Crear metal</string>
+    <string name="MetalName">Nombre del metal</string>
+    <string name="MetalDescription">Descripción del metal</string>
 </resources>
