@@ -51,8 +51,6 @@ public class ProfileFragment extends Fragment {
         recyclerView = view.findViewById(R.id.images);
 
 
-
-
         loadImages();
 
         return view;

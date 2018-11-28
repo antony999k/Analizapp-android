@@ -24,7 +24,21 @@ public class Image implements Serializable {
         return filename;
     }
 
+    public double getTiempo_minutos() {
+        return tiempo_minutos;
+    }
 
+    public double getGrados() {
+        return grados;
+    }
+
+    public double getArea_picos() {
+        return area_picos;
+    }
+
+    public double getArea_abajo() {
+        return area_abajo;
+    }
 
     public Image(int id, String metal, String experimento, double tiempo_minutos, double grados, double area_picos, double area_abajo, String descripcion, String filename , String ruta_original, String ruta_analisis) {
         this.id = id;
