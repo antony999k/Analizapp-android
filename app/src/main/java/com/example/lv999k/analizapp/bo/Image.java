@@ -12,7 +12,7 @@ public class Image {
     int id;
     String metal;
     String experimento;
-    double tiempo;
+    double tiempo_minutos;
     double grados;
     double area_picos;
     double area_abajo;
@@ -25,11 +25,13 @@ public class Image {
         return filename;
     }
 
-    public Image(int id, String metal, String experimento, double tiempo, double grados, double area_picos, double area_abajo, String descripcion, String filename , String ruta_original, String ruta_analisis) {
+
+
+    public Image(int id, String metal, String experimento, double tiempo_minutos, double grados, double area_picos, double area_abajo, String descripcion, String filename , String ruta_original, String ruta_analisis) {
         this.id = id;
         this.metal = metal;
         this.experimento = experimento;
-        this.tiempo = tiempo;
+        this.tiempo_minutos = tiempo_minutos;
         this.grados = grados;
         this.area_picos = area_picos;
         this.area_abajo = area_abajo;

@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -32,7 +33,12 @@ import retrofit2.http.Path;
 public interface ApiService {
     @Multipart
     @POST("images/analyze")
-    Call<ResponseBody> analyzeImage(@Part MultipartBody.Part image);
+    Call<ResponseBody> analyzeImage(@Part MultipartBody.Part image,
+                                    @Part("metal_id") int metal_id,
+                                    @Part("experimento_id") int experimento_id,
+                                    @Part("descripcion") RequestBody descripcion,
+                                    @Part("tiempo_minutos") int tiempo_minutos,
+                                    @Part("grados") int grados);
 
     @FormUrlEncoded
     @POST("user/login")

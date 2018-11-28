@@ -68,8 +68,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:lines="5"
+                    android:hint="@string/Description"
                     android:inputType="textMultiLine"
-                    android:hint="@string/Description"/>
+                    android:selectAllOnFocus="true"
+                    android:singleLine="false" />
+
             </LinearLayout>
         </ScrollView>
 
@@ -81,15 +85,16 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/globalPadding"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/save_btn"
+            style="@style/final_btn_yellow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/final_btn_yellow"
+            android:onClick="save"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="@string/SAVE"
-            android:onClick="save"/>
+            android:text="@string/SAVE" />
     </LinearLayout>
 
 </LinearLayout>

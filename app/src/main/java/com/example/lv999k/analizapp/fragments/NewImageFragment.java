@@ -1,6 +1,10 @@
 package com.example.lv999k.analizapp.fragments;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +21,14 @@ import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.utils.CustomResponse;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +39,7 @@ import retrofit2.Response;
 
 public class NewImageFragment extends Fragment {
     ApiService apiService;
+    Uri image;
     String img_path;
 
     Spinner metal_dropdown;
@@ -40,16 +50,18 @@ public class NewImageFragment extends Fragment {
     List<Experiment> experiments;
     ArrayList<String> experiment_names;
 
+    Button save_button;
+
 
     public NewImageFragment() {
         // Required empty public constructor
     }
 
-    public static NewImageFragment newInstance(String img_path){
+    public static NewImageFragment newInstance(Uri image){
         NewImageFragment fragment = new NewImageFragment();
         Bundle args = new Bundle();
 
-        args.putString("img_path", img_path);
+        args.putString("uri", image.toString());
         fragment.setArguments(args);
 
         return fragment;
@@ -62,7 +74,9 @@ public class NewImageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         apiService = ((Principal) this.getActivity()).apiService;
         if (getArguments() != null) {
-            img_path= getArguments().getString("img_path");
+            String string = getArguments().getString("uri");
+            image = Uri.parse(string);
+            img_path = getRealPath(image);
         }
     }
 
@@ -77,17 +91,69 @@ public class NewImageFragment extends Fragment {
 
         metal_dropdown = view.findViewById(R.id.dropdown_metal);
         experiment_dropdown = view.findViewById(R.id.dropdown_experiment);
+        save_button = view.findViewById(R.id.save_btn);
+
+//        save_button.setOnClickListener();
 
         loadMetals();
         loadExperiments();
+
+        save();
 
         return view;
 
     }
 
-    public void loadElements(){
+
+    public void save(){
+        File file = new File(img_path);
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(image)), file);
+
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+        RequestBody descripcion = RequestBody.create(MediaType.parse("text/plain"), "prueba");
+
+        Call<ResponseBody> call = apiService.analyzeImage(body, 1, 1, descripcion, 20, 80);
+
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    Log.d("Successful", "SE ARMOO");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
 
     }
+
+    public String getRealPath(Uri uri){
+        // Will return "image:x*"
+        String wholeID = DocumentsContract.getDocumentId(uri);
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+        String[] column = { MediaStore.Images.Media.DATA };
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+        Cursor cursor = getActivity().getContentResolver().
+                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        column, sel, new String[]{ id }, null);
+        String filePath = "";
+        int columnIndex = cursor.getColumnIndex(column[0]);
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+        return filePath;
+    }
+
 
     public void loadExperiments(){
         Call<CustomResponse<Experiment>> call = apiService.allExperiments();
