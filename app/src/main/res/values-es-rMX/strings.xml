@@ -39,4 +39,6 @@
     <string name="CreateMetal">Crear metal</string>
     <string name="MetalName">Nombre del metal</string>
     <string name="MetalDescription">Descripción del metal</string>
+    <string name="NewMetal">Nuevo Metal</string>
+    <string name="Authenticating">Autenticando...</string>
 </resources>
