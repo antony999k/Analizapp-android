@@ -122,7 +122,6 @@ public class NewImageFragment extends Fragment {
 
 
         return view;
-
     }
 
 

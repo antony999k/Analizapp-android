@@ -18,7 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.lv999k.analizapp.fragments.ExperimentFragment;
+import com.example.lv999k.analizapp.fragments.ExperimentsFragment;
 import com.example.lv999k.analizapp.fragments.MetalsFragment;
 import com.example.lv999k.analizapp.fragments.NewExperimentFragment;
 import com.example.lv999k.analizapp.fragments.ProfileFragment;
@@ -98,7 +98,7 @@ public class Principal extends AppCompatActivity {
                         fragment = new MetalsFragment();
                         break;
                     case R.id.item_experiments:
-                        fragment = new NewExperimentFragment();
+                        fragment = new ExperimentsFragment();
                         break;
                     case R.id.item_profile:
                         fragment = new ProfileFragment();
