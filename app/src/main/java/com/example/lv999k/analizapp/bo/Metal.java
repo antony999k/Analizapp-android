@@ -1,5 +1,7 @@
 package com.example.lv999k.analizapp.bo;
 
+import com.example.lv999k.analizapp.services.ApiService;
+
 /**
  * Created by javiercuriel on 11/26/18.
  */

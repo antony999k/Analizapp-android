@@ -212,32 +212,35 @@ public class HomeFragment extends Fragment {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK){
             try{
                 Uri selectedImage = data.getData();
-                File file = new File(getRealPath(selectedImage));
-                RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(selectedImage)), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+                Fragment fragment = NewImageFragment.newInstance(getRealPath(selectedImage));
+                ((Principal) this.getActivity()).setFragment(fragment);
 
-                //Ejemplo creacion de metal
-//                Metal metal = new Metal(null , "Nuevo Metal", "Desde android");
-//                Call<ResponseBody> call = apiService.newMetal(metal);
+//                File file = new File(getRealPath(selectedImage));
+//                RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(selectedImage)), file);
+//                MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 //
-                Call<ResponseBody> call = apiService.analyzeImage(body);
-
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        if(response.isSuccessful()){
-                            // Paso
-                        }
-                        else{
-                            // No paso
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("Upload error:", t.getMessage());
-                    }
-                });
+//                //Ejemplo creacion de metal
+////                Metal metal = new Metal(null , "Nuevo Metal", "Desde android");
+////                Call<ResponseBody> call = apiService.newMetal(metal);
+////
+//                Call<ResponseBody> call = apiService.analyzeImage(body);
+//
+//                call.enqueue(new Callback<ResponseBody>() {
+//                    @Override
+//                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+//                        if(response.isSuccessful()){
+//                            // Paso
+//                        }
+//                        else{
+//                            // No paso
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                        Log.e("Upload error:", t.getMessage());
+//                    }
+//                });
             } catch (Exception e){
                 e.printStackTrace();
             }

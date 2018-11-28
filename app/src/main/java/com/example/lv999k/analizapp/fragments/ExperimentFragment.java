@@ -36,7 +36,7 @@ public class ExperimentFragment extends Fragment  {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_experiment, container, false);
+        View view = inflater.inflate(R.layout.fragment_newimage, container, false);
         dropdown_experiment = (Spinner) view.findViewById(R.id.dropdown_experiment);
         dropdown_metal  = (Spinner) view.findViewById(R.id.dropdown_metal);
 
