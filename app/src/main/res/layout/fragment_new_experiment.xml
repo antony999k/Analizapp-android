@@ -38,22 +38,6 @@ tools:context=".fragments.NewExperimentFragment">
                 android:ems="10"
                 android:hint="@string/ExperimentDescription"
                 android:inputType="textMultiLine" />
-
-            <EditText
-                android:id="@+id/experiment_user_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/ExperimentUserid"
-                android:inputType="numberDecimal" />
-
-            <EditText
-                android:id="@+id/experiment_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/Date"
-                android:inputType="date" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
