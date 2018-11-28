@@ -37,8 +37,8 @@ public interface ApiService {
                                     @Part("metal_id") int metal_id,
                                     @Part("experimento_id") int experimento_id,
                                     @Part("descripcion") RequestBody descripcion,
-                                    @Part("tiempo_minutos") int tiempo_minutos,
-                                    @Part("grados") int grados);
+                                    @Part("tiempo_minutos") double tiempo_minutos,
+                                    @Part("grados") double grados);
 
     @FormUrlEncoded
     @POST("user/login")

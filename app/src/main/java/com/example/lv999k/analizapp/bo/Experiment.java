@@ -19,6 +19,10 @@ public class Experiment {
         return nombre;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
