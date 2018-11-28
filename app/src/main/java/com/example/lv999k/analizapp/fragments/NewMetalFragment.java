@@ -85,24 +85,24 @@ public class NewMetalFragment extends Fragment {
 
         Call<ResponseBody> call = apiService.newMetal(newMetal);
         call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        if(response.isSuccessful()){
-                            Toast.makeText(getActivity().getBaseContext(), "Paso", Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        }
-                        else{
-                            Toast.makeText(getActivity().getBaseContext(), "No paso", Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        }
-                    }
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getActivity().getBaseContext(), "Paso", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }
+                else{
+                    Toast.makeText(getActivity().getBaseContext(), "No paso", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(getActivity().getBaseContext(), "Error al crear el material", Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-                    }
-                });
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getActivity().getBaseContext(), "Error al crear el material", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        });
 
     }
 
