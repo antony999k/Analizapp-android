@@ -1,5 +1,6 @@
 package com.example.lv999k.analizapp.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -41,6 +42,8 @@ public class MetalsFragment extends Fragment {
     ListView metalList;
     FloatingActionButton add_metal_btn;
 
+//    Principal activity;
+
 
     public MetalsFragment() {
         // Required empty public constructor
@@ -50,6 +53,7 @@ public class MetalsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        activity = (Principal) this.getActivity();
         apiService = ((Principal) this.getActivity()).apiService;
 
     }
@@ -65,17 +69,11 @@ public class MetalsFragment extends Fragment {
         loadMetals();
 
         add_metal_btn = (FloatingActionButton) view.findViewById(R.id.add_metal_btn);
-        add_metal_btn.setOnClickListener(new View.OnClickListener()
-        {
+        add_metal_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Fragment fragment = new NewMetalFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                ((Principal) getActivity()).setFragment(fragment);
             }
         });
 
