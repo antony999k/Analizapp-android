@@ -60,6 +60,11 @@
                 android:layout_marginTop="8dp"
                 android:textStyle="bold" />
 
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/area_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
 
 
