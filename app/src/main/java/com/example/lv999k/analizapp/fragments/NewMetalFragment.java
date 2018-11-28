@@ -51,7 +51,7 @@ public class NewMetalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_metal, container, false);
-        getActivity().setTitle(R.string.NewMetal);
+        //getActivity().setTitle(R.string.NewMetal);
 
         metal_name = (EditText)view.findViewById(R.id.metal_name);
         metal_description = (EditText)view.findViewById(R.id.metal_description);

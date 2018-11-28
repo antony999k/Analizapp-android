@@ -55,6 +55,11 @@
 
     <!-- Loading screens -->
     <string name="Authenticating">Authenticating...</string>
+    <string name="ExperimentName">Experiment Name</string>
+    <string name="ExperimentDescription">Experiment Description</string>
+    <string name="ExperimentUserid">Experiment user id</string>
+    <string name="Date">Date</string>
+    <string name="CreateExperiment">Create Experiment</string>
 
 
 </resources>
