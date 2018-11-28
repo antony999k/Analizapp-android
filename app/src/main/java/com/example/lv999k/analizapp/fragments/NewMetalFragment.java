@@ -2,6 +2,7 @@ package com.example.lv999k.analizapp.fragments;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,18 +90,22 @@ public class NewMetalFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(getActivity().getBaseContext(), "Paso", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getBaseContext(), "El metal se creo con exito", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
+                    final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack();
                 }
                 else{
-                    Toast.makeText(getActivity().getBaseContext(), "No paso", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getBaseContext(), "Error al crear el metal", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity().getBaseContext(), "Error al crear el material", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getBaseContext(), "Error al conectarse con el servidor", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

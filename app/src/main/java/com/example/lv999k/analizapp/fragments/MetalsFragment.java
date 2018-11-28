@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lv999k.analizapp.Principal;
@@ -41,6 +42,7 @@ public class MetalsFragment extends Fragment {
 
     ListView metalList;
     FloatingActionButton add_metal_btn;
+    ProgressBar metals_fragment_loading;
 
 //    Principal activity;
 
@@ -59,11 +61,10 @@ public class MetalsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_metals, container, false);
 
+        metals_fragment_loading = (ProgressBar)view.findViewById(R.id.metals_fragment_loading);
         metalList = view.findViewById(R.id.metal_list);
 
         loadMetals();
@@ -82,15 +83,18 @@ public class MetalsFragment extends Fragment {
     }
 
     public void loadMetals(){
+        metals_fragment_loading.setVisibility(View.VISIBLE);
         Call<CustomResponse<Metal>> call = apiService.allMetals();
         call.enqueue(new Callback<CustomResponse<Metal>>() {
             @Override
             public void onResponse(Call<CustomResponse<Metal>> call, Response<CustomResponse<Metal>> response) {
                 if(response.isSuccessful()){
+                    metals_fragment_loading.setVisibility(View.GONE);
                     setAdapter(response.body().getResults());
                 }
                 else{
-                    Log.e("Response", "Error in response");
+                    metals_fragment_loading.setVisibility(View.GONE);
+                    Toast.makeText(getActivity().getBaseContext(), "Error al obtener los metales", Toast.LENGTH_LONG).show();
                 }
             }
 
