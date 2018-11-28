@@ -7,9 +7,6 @@
         <item android:id="@+id/item_profile"
             android:icon="@drawable/ic_profile"
             android:title="@string/Profile"/>
-        <item android:id="@+id/item_analytics"
-            android:icon="@drawable/ic_chart"
-            android:title="@string/Analytics"/>
 
         <item android:id="@+id/item_metals"
             android:icon="@drawable/ic_steel"

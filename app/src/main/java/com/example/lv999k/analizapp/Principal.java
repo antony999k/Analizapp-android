@@ -22,7 +22,6 @@ import com.example.lv999k.analizapp.fragments.MetalsFragment;
 import com.example.lv999k.analizapp.fragments.ProfileFragment;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.services.ApiServiceGenerator;
-import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
 import com.example.lv999k.analizapp.fragments.HomeFragment;
 import com.example.lv999k.analizapp.fragments.SettingsFragment;
 import com.example.lv999k.analizapp.utils.Session;
@@ -94,9 +93,6 @@ public class Principal extends AppCompatActivity {
                 switch(id) {
                     case R.id.item_home:
                         fragment = new HomeFragment();
-                        break;
-                    case R.id.item_analytics:
-                        fragment = new AnalyticsFragment();
                         break;
                     case R.id.item_settings:
                         fragment = new SettingsFragment();

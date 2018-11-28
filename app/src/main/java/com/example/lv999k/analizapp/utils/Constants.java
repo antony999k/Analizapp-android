@@ -5,6 +5,7 @@ package com.example.lv999k.analizapp.utils;
  */
 
 public class Constants {
+    //public static final String SERVER = "http://138.68.53.94";
     public static final String SERVER = "http://192.168.15.21:3500";
     public static final String TMP_SERVER = SERVER + "/";
 
