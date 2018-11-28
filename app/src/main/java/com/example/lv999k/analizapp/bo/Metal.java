@@ -28,7 +28,6 @@ public class Metal {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-
 }
 
 

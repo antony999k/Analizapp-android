@@ -1,9 +1,11 @@
 package com.example.lv999k.analizapp.services;
 
 import com.example.lv999k.analizapp.bo.Experiment;
+import com.example.lv999k.analizapp.bo.Image;
 import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.utils.CustomResponse;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 import okhttp3.MultipartBody;
@@ -35,6 +37,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/login")
     Call<ResponseBody> userLogin(@Field("email") String email, @Field("password") String password);
+
+    // Images
+    @GET("images/all")
+    Call<CustomResponse<Image>> allImages();
+
+    @GET("user_data/images/{filename}")
+    Call<ResponseBody> loadOriginalImage(@Path("filename") String filename);
+
+    @GET("user_data/analyzed_images/{filename}")
+    Call<ResponseBody> loadAnalyzedImage(@Path("filename") String filename);
 
     // Metals
     @GET("metal/all")
