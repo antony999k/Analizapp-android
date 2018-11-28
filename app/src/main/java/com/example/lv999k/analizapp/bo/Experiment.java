@@ -1,5 +1,7 @@
 package com.example.lv999k.analizapp.bo;
 
+import android.widget.EditText;
+
 import java.util.Date;
 
 /**
