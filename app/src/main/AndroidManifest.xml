@@ -27,7 +27,6 @@
         <activity android:name=".Login" android:windowSoftInputMode="adjustResize" android:theme="@style/AnalizapThemeNoTitle"/>
         <activity android:name=".Signup" android:windowSoftInputMode="adjustResize" android:theme="@style/AnalizapThemeNoTitle"/>
         <activity android:name=".Profile" android:theme="@style/AnalizapThemeNoTitle" />
-        <activity android:name=".Material" />
 
         <meta-data
             android:name="preloaded_fonts"
