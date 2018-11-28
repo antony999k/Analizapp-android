@@ -6,7 +6,7 @@
         android:right="40dp"
         android:top="40dp">
         <bitmap
-            android:gravity="center"
+            android:gravity="clip_horizontal"
             android:mipMap="false"
             android:src="@drawable/analizapp_icon" />
     </item>
