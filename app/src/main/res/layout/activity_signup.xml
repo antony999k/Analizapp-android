@@ -33,6 +33,14 @@
                     app:srcCompat="@drawable/analizapp_icon" />
 
                 <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/Name"
+                    android:inputType="textPersonName" />
+
+                <EditText
                     android:id="@+id/lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,14 +63,6 @@
                     android:ems="10"
                     android:hint="@string/passwordHint"
                     android:inputType="textPassword" />
-
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/Name"
-                    android:inputType="textPersonName" />
 
                 <TextView
                     android:id="@+id/termsLink"
