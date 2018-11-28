@@ -1,5 +1,5 @@
 # Android Analizapp
-Creado: @antony999k
+Creado: @antony999k y @javicuriel
 
 [![version](https://img.shields.io/badge/version-0.0.1-ff69b4.svg)]()
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/wasabeef/awesome-android-ui)
@@ -27,3 +27,4 @@ No existen cambios de ruptura
 
 # Ayuda
 @antony999k, antony999k@hotmail.com
+@javicuriel
