@@ -12,6 +12,7 @@ import android.widget.Spinner;
 
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
+import com.example.lv999k.analizapp.bo.Experiment;
 import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.utils.CustomResponse;
@@ -34,6 +35,10 @@ public class NewImageFragment extends Fragment {
     Spinner metal_dropdown;
     List<Metal> metals;
     ArrayList<String> metal_names;
+
+    Spinner experiment_dropdown;
+    List<Experiment> experiments;
+    ArrayList<String> experiment_names;
 
 
     public NewImageFragment() {
@@ -71,8 +76,10 @@ public class NewImageFragment extends Fragment {
         button.setText(img_path);
 
         metal_dropdown = view.findViewById(R.id.dropdown_metal);
+        experiment_dropdown = view.findViewById(R.id.dropdown_experiment);
 
         loadMetals();
+        loadExperiments();
 
         return view;
 
@@ -82,22 +89,25 @@ public class NewImageFragment extends Fragment {
 
     }
 
+    public void loadExperiments(){
+        Call<CustomResponse<Experiment>> call = apiService.allExperiments();
 
-    public void setElements(Call call){
-        call.enqueue(new Callback<CustomResponse>() {
+        call.enqueue(new Callback<CustomResponse<Experiment>>() {
             @Override
-            public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+            public void onResponse(Call<CustomResponse<Experiment>> call, Response<CustomResponse<Experiment>> response) {
                 if(response.isSuccessful()){
-                    metals = response.body().getResults();
-                    setMetalNames();
+                    experiments = response.body().getResults();
+                    setExperimentNames();
                 }
             }
             @Override
-            public void onFailure(Call<CustomResponse> call, Throwable t) {
+            public void onFailure(Call<CustomResponse<Experiment>> call, Throwable t) {
                 t.printStackTrace();
             }
         });
     }
+
+
 
     public void loadMetals(){
         Call<CustomResponse<Metal>> call = apiService.allMetals();
@@ -116,6 +126,15 @@ public class NewImageFragment extends Fragment {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void setExperimentNames(){
+        experiment_names = new ArrayList<>();
+        for(Experiment experiment: experiments){
+            experiment_names.add(experiment.getNombre());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, experiment_names);
+        experiment_dropdown.setAdapter(adapter);
     }
 
 

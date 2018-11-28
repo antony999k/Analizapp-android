@@ -15,6 +15,22 @@ public class Experiment {
     Integer usuario_id;
     Date fecha;
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Integer getUsuario_id() {
+        return usuario_id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
     public Experiment(Integer id, String nombre, String descripcion, Integer usuario_id, Date fecha) {
         this.id = id;
         this.nombre = nombre;

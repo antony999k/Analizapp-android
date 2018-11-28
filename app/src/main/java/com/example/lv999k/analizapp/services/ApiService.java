@@ -62,9 +62,9 @@ public interface ApiService {
 
     // Experiments
     @GET("experiment/all")
-    Call<ResponseBody> allExperiments();
+    Call<CustomResponse<Experiment>> allExperiments();
     @GET("experiment/get/{id}")
-    Call<ResponseBody> getExperiment(@Path("id") Integer id);
+    Call<CustomResponse<Experiment>> getExperiment(@Path("id") Integer id);
     @POST("experiment/new")
     Call<ResponseBody> newExperiment(@Body Experiment experiment);
     @PUT("experiment/update/{id}")
