@@ -5,8 +5,12 @@ package com.example.lv999k.analizapp.utils;
  */
 
 public class Constants {
-    public static final String TMP_SERVER = "http://10.49.87.36:3500/";
-    public static final String SERVER = "http://10.49.87.36:3500";
+    public static final String SERVER = "http://192.168.15.21:3500";
+    public static final String TMP_SERVER = SERVER + "/";
+
+    public static final String ORIGINAL_IMAGES = TMP_SERVER + "user_data/images/";
+    public static final String ANALYZED_IMAGES = TMP_SERVER + "user_data/analyzed_images/";
+
 
     // User
     public static final String USERS_ALL = SERVER + "/users";
