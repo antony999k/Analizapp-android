@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:id="@+id/fragment_new_experiment"
+android:orientation="vertical"
+android:layout_height="match_parent"
+tools:context=".fragments.NewExperimentFragment">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_weight="1">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/globalPadding"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/experiment_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ExperimentName"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/experiment_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ExperimentDescription"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/experiment_user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ExperimentUserid"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/experiment_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Date"
+                android:inputType="date" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/globalPadding"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/new_experiment_btn"
+        style="@style/final_btn_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/CreateExperiment" />
+</LinearLayout>
+
+</LinearLayout>

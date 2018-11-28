@@ -41,4 +41,8 @@
     <string name="MetalDescription">Descripción del metal</string>
     <string name="NewMetal">Nuevo Metal</string>
     <string name="Authenticating">Autenticando...</string>
+    <string name="ExperimentName">Nombre de experimento</string>
+    <string name="ExperimentDescription">Descripción de experimento</string>
+    <string name="ExperimentUserid">Userid de experimento</string>
+    <string name="Date">Fecha</string>
 </resources>
