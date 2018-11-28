@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lv999k.analizapp.fragments.MetalsFragment;
+import com.example.lv999k.analizapp.fragments.ProfileFragment;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.services.ApiServiceGenerator;
 import com.example.lv999k.analizapp.fragments.AnalyticsFragment;
@@ -86,11 +87,12 @@ public class Principal extends AppCompatActivity {
                 if(id == R.id.item_logout){
                     logOutAlertDialog();
                     return true;
-                }else if(id == R.id.item_profile){
-                    startActivity(new Intent(Principal.this, Profile.class));
-                    drawerLayout.closeDrawers();
-                    return true;
                 }
+//                else if(id == R.id.item_profile){
+//                    startActivity(new Intent(Principal.this, Profile.class));
+//                    drawerLayout.closeDrawers();
+//                    return true;
+//                }
                 switch(id) {
                     case R.id.item_home:
                         fragment = new HomeFragment();
@@ -103,7 +105,9 @@ public class Principal extends AppCompatActivity {
                         break;
                     case R.id.item_metals:
                         fragment = new MetalsFragment();
-                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.item_profile:
+                        fragment = new ProfileFragment();
                         break;
                     default:
                         drawerLayout.closeDrawers();

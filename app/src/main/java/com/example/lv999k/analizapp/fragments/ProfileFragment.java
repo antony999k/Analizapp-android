@@ -45,7 +45,8 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        recyclerView = view.findViewById(R.id.test);
+        recyclerView = view.findViewById(R.id.images);
+
         loadImages();
 
         return view;

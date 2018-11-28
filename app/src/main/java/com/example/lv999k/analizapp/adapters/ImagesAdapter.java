@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.lv999k.analizapp.R;
@@ -47,7 +48,8 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
         public String title;
 
         public ImageView imageView;
-        public URL img_url;
+
+        ProgressBar progressBar;
 
 
 
@@ -57,6 +59,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
             textView = view.findViewById(R.id.imageTitle);
             imageView = view.findViewById(R.id.image);
+            progressBar = view.findViewById(R.id.progressBar);
 
         }
 
@@ -79,6 +82,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if(response.isSuccessful()){
                         Bitmap bmp =  BitmapFactory.decodeStream(response.body().byteStream());
+                        progressBar.setVisibility(View.GONE);
                         imageView.setImageBitmap(bmp);
                     }
                 }
