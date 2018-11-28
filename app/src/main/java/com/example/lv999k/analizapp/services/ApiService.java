@@ -47,6 +47,8 @@ public interface ApiService {
     // Images
     @GET("images/all")
     Call<CustomResponse<Image>> allImages();
+    @GET("images/get/{id}")
+    Call<CustomResponse<Image>> getImage(@Path("id") Integer id);
 
     @GET("user_data/images/{filename}")
     Call<ResponseBody> loadOriginalImage(@Path("filename") String filename);

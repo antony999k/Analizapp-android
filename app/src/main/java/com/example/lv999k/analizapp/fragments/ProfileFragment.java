@@ -1,11 +1,14 @@
 package com.example.lv999k.analizapp.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -47,6 +50,9 @@ public class ProfileFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.images);
 
+
+
+
         loadImages();
 
         return view;
@@ -59,7 +65,15 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<CustomResponse<Image>> call, Response<CustomResponse<Image>> response) {
                 if(response.isSuccessful()){
-                    ImagesAdapter imagesAdapter = new ImagesAdapter(response.body().getResults(), apiService);
+                    ImagesAdapter.OnItemClickListener listener = new ImagesAdapter.OnItemClickListener(){
+                        @Override
+                        public void onItemClick(Image image) {
+                            Fragment fragment = ImageInfoFragment.newInstance(image);
+                            ((Principal) getActivity()).setFragment(fragment);
+                        }
+                    };
+
+                    ImagesAdapter imagesAdapter = new ImagesAdapter(response.body().getResults(), apiService, listener );
                     LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                     llm.setOrientation(LinearLayoutManager.VERTICAL);
                     recyclerView.setLayoutManager(llm);

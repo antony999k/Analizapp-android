@@ -1,14 +1,13 @@
 package com.example.lv999k.analizapp.bo;
 
-import android.graphics.Bitmap;
 
-import com.example.lv999k.analizapp.utils.Constants;
+import java.io.Serializable;
 
 /**
  * Created by javiercuriel on 11/27/18.
  */
 
-public class Image {
+public class Image implements Serializable {
     int id;
     String metal;
     String experimento;
