@@ -1,18 +1,24 @@
 package com.example.lv999k.analizapp.fragments;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
@@ -51,6 +57,11 @@ public class NewImageFragment extends Fragment {
     ArrayList<String> experiment_names;
 
     Button save_button;
+
+    EditText timeText;
+    EditText degreesText;
+    EditText descriptionText;
+
 
 
     public NewImageFragment() {
@@ -93,12 +104,22 @@ public class NewImageFragment extends Fragment {
         experiment_dropdown = view.findViewById(R.id.dropdown_experiment);
         save_button = view.findViewById(R.id.save_btn);
 
-//        save_button.setOnClickListener();
+        timeText = view.findViewById(R.id.time);
+        degreesText = view.findViewById(R.id.degrees);
+        descriptionText = view.findViewById(R.id.description);
+
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                save();
+            }
+        });
 
         loadMetals();
         loadExperiments();
 
-        save();
+
 
         return view;
 
@@ -106,28 +127,52 @@ public class NewImageFragment extends Fragment {
 
 
     public void save(){
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
+                R.style.AnalizapTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Analizando Imagen...");
+        progressDialog.show();
+
+
         File file = new File(img_path);
 
         RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(image)), file);
 
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-        RequestBody descripcion = RequestBody.create(MediaType.parse("text/plain"), "prueba");
+        RequestBody descripcion = RequestBody.create(MediaType.parse("text/plain"), descriptionText.getText().toString());
 
-        Call<ResponseBody> call = apiService.analyzeImage(body, 1, 1, descripcion, 20, 80);
+        Call<ResponseBody> call = apiService.analyzeImage(
+                body,
+                metals.get(metal_dropdown.getSelectedItemPosition()).getId(),
+                experiments.get(experiment_dropdown.getSelectedItemPosition()).getId(),
+                descripcion,
+                Double.parseDouble(timeText.getText().toString()),
+                Double.parseDouble(degreesText.getText().toString())
+        );
 
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
-                    Log.d("Successful", "SE ARMOO");
+                    Toast.makeText(getActivity().getBaseContext(), "Se analizo imagen con exito", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                    final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack();
+                }
+                else{
+                    Toast.makeText(getActivity().getBaseContext(), "Error al analizar la imagen", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                t.printStackTrace();
+                Toast.makeText(getActivity().getBaseContext(), "Error al conectarse con el servidor", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
             }
         });
 
