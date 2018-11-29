@@ -48,6 +48,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -221,7 +222,31 @@ public class HomeFragment extends Fragment {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK){
             try{
                 Uri selectedImage = data.getData();
-                NewImageFragment fragment = NewImageFragment.newInstance(getRealPath(selectedImage));
+                String path = "";
+                if(selectedImage == null){
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+
+                    //create a file to write bitmap data
+                    File f = new File(getActivity().getBaseContext().getCacheDir().getPath(), String.valueOf(System.currentTimeMillis())+".jpg");
+                    f.createNewFile();
+
+                    //Convert bitmap to byte array
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                    byte[] bitmapdata = bos.toByteArray();
+
+                    //write the bytes in file
+                    FileOutputStream fos = new FileOutputStream(f);
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                    path = f.getPath();
+                }
+                else{
+                    path = getRealPath(selectedImage);
+                }
+                NewImageFragment fragment = NewImageFragment.newInstance(path);
                 ((Principal) this.getActivity()).setFragment(fragment);
             } catch (Exception e){
                 e.printStackTrace();

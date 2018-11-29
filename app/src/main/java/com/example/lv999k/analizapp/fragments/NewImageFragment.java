@@ -133,7 +133,7 @@ public class NewImageFragment extends Fragment {
 
         File file = new File(img_path);
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(image)), file);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
 
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
