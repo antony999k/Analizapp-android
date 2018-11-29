@@ -93,7 +93,7 @@ public class ImageInfoFragment extends Fragment {
         setImageInfo();
         loadImage();
 
-        addData();
+        //addData();
 
         return view;
     }
