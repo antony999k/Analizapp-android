@@ -7,6 +7,13 @@ Creado: @antony999k y @javicuriel
 # Descargar
 Descarga la versión del apk: [Descargar](https://github.com/antony999k/Analizapp-android/releases)
 
+# Características
+- Login de usuarios
+- Registro de Usuarios
+- Analizador de Imágenes de Metales
+- Crud de Metales
+- Crud de Experimentos
+
 # Contribuir con el desarrollo
 ## Guía de estilos
 ### Mensajes en los Commits de Git
