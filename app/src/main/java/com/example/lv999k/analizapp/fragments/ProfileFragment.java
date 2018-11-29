@@ -106,6 +106,52 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    public void loadImages(){
+        profile_fragment_loading.setVisibility(View.VISIBLE);
+        Call<CustomResponse<Image>> call = apiService.allImagesMe();
+        call.enqueue(new Callback<CustomResponse<Image>>() {
+            @Override
+            public void onResponse(Call<CustomResponse<Image>> call, Response<CustomResponse<Image>> response) {
+                if(response.isSuccessful()){
+                    ImagesAdapter.OnItemClickListener listener = new ImagesAdapter.OnItemClickListener(){
+                        @Override
+                        public void onItemClick(Image image) {
+                            Fragment fragment = ImageInfoFragment.newInstance(image);
+                            ((Principal) getActivity()).setFragment(fragment);
+                        }
+                    };
+
+                    profile_fragment_loading.setVisibility(View.GONE);
+                    ImagesAdapter imagesAdapter = new ImagesAdapter(response.body().getResults(), apiService, listener );
+                    LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    llm.setReverseLayout(true);
+                    recyclerView.setLayoutManager(llm);
+                    recyclerView.setAdapter( imagesAdapter );
+                }
+            }
+            @Override
+            public void onFailure(Call<CustomResponse<Image>> call, Throwable t) {
+                profile_fragment_loading.setVisibility(View.GONE);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void saveUserData(JSONObject resp){
+        SharedPreferences prefs = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        try {
+            editor.putString("nombre", resp.getString("nombre"));
+            editor.putString("apellido", resp.getString("apellido"));
+            editor.putString("correo", resp.getString("correo"));
+            editor.putString("imgSubidas", resp.getString("imgSubidas"));
+            editor.putString("img", resp.getString("img"));
+            editor.commit();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void profileQuery(){
         user_profile_loading.setVisibility(View.VISIBLE);
@@ -156,51 +202,5 @@ public class ProfileFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(postRequest);
-    }
-
-    public void saveUserData(JSONObject resp){
-        SharedPreferences prefs = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        try {
-            editor.putString("nombre", resp.getString("nombre"));
-            editor.putString("apellido", resp.getString("apellido"));
-            editor.putString("correo", resp.getString("correo"));
-            editor.putString("imgSubidas", resp.getString("imgSubidas"));
-            editor.putString("img", resp.getString("img"));
-            editor.commit();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadImages(){
-        profile_fragment_loading.setVisibility(View.VISIBLE);
-        Call<CustomResponse<Image>> call = apiService.allImagesMe();
-        call.enqueue(new Callback<CustomResponse<Image>>() {
-            @Override
-            public void onResponse(Call<CustomResponse<Image>> call, Response<CustomResponse<Image>> response) {
-                if(response.isSuccessful()){
-                    ImagesAdapter.OnItemClickListener listener = new ImagesAdapter.OnItemClickListener(){
-                        @Override
-                        public void onItemClick(Image image) {
-                            Fragment fragment = ImageInfoFragment.newInstance(image);
-                            ((Principal) getActivity()).setFragment(fragment);
-                        }
-                    };
-
-                    profile_fragment_loading.setVisibility(View.GONE);
-                    ImagesAdapter imagesAdapter = new ImagesAdapter(response.body().getResults(), apiService, listener );
-                    LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                    llm.setOrientation(LinearLayoutManager.VERTICAL);
-                    recyclerView.setLayoutManager(llm);
-                    recyclerView.setAdapter( imagesAdapter );
-                }
-            }
-            @Override
-            public void onFailure(Call<CustomResponse<Image>> call, Throwable t) {
-                profile_fragment_loading.setVisibility(View.GONE);
-                t.printStackTrace();
-            }
-        });
     }
 }
