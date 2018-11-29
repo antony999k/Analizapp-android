@@ -40,9 +40,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ImageInfoFragment extends Fragment {
     ApiService apiService;
 
