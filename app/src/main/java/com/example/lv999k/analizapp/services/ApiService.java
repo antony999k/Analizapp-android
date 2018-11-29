@@ -3,6 +3,7 @@ package com.example.lv999k.analizapp.services;
 import com.example.lv999k.analizapp.bo.Experiment;
 import com.example.lv999k.analizapp.bo.Image;
 import com.example.lv999k.analizapp.bo.Metal;
+import com.example.lv999k.analizapp.bo.User;
 import com.example.lv999k.analizapp.utils.CustomResponse;
 
 import java.io.ByteArrayInputStream;
@@ -39,10 +40,13 @@ public interface ApiService {
                                     @Part("descripcion") RequestBody descripcion,
                                     @Part("tiempo_minutos") double tiempo_minutos,
                                     @Part("grados") double grados);
-
+    //Users
     @FormUrlEncoded
     @POST("user/login")
     Call<ResponseBody> userLogin(@Field("email") String email, @Field("password") String password);
+
+    @PUT("add-uploaded-image")
+    Call<ResponseBody> updateImgSubidas();
 
     // Images
     @GET("images/all")

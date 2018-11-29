@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <SwitchPreference
         android:key="pref_sync"
-        android:title="Panel administrador"
-        android:summary="Habilita el panel si eres un administrador"
+        android:title="Mejora visual"
+        android:summary="Habilita si quieres letras más nítidas"
         android:defaultValue="false" />
 
     <Preference
         android:key="vesion"
         android:title="@string/Vesion"
-        android:summary="0.0.1"/>
+        android:summary="1.0.0"/>
 
 </PreferenceScreen>

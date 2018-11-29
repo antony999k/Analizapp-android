@@ -46,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="signupLink"
+            android:textColor="#5e8bed"
             android:text="@string/NotAccount" />
     </LinearLayout>
 

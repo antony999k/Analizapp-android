@@ -21,6 +21,50 @@ public class User {
         this. correo = correo;
         this.img = img;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public Date getDiaRegistro() {
+        return diaRegistro;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public Integer getImgSubidas() {
+        return imgSubidas;
+    }
 }
 /*
     CREATE TABLE `Usuarios` (

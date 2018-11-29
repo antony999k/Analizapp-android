@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/Name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textCapWords" />
 
                 <EditText
                     android:id="@+id/lastName"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/LastName"
-                    android:inputType="textPersonName" />
+                    android:inputType="textCapWords" />
 
                 <EditText
                     android:id="@+id/email"
@@ -68,13 +68,16 @@
                     android:id="@+id/termsLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Terms" />
+                    android:text="@string/Terms"
+                    android:textSize="8sp" />
 
                 <TextView
                     android:id="@+id/loginLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="loginLink"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#5e8bed"
                     android:text="@string/AlreadyHaveAccount" />
             </LinearLayout>
         </ScrollView>

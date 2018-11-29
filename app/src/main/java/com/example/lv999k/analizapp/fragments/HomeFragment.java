@@ -203,6 +203,7 @@ public class HomeFragment extends Fragment {
             editor.putString("nombre", resp.getString("nombre"));
             editor.putString("apellido", resp.getString("apellido"));
             editor.putString("correo", resp.getString("correo"));
+            editor.putString("imgSubidas", resp.getString("imgSubidas"));
             editor.commit();
         } catch (JSONException e) {
             e.printStackTrace();

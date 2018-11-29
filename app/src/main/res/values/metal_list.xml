@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="metal_list">
-        <item>Stainless</item>
-        <item>Aluminum</item>
-        <item>Brass</item>
-        <item>Satin</item>
-    </string-array>
-</resources>

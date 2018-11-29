@@ -54,17 +54,16 @@ public class Profile extends AppCompatActivity {
         user_profile_mail = (TextView) findViewById(R.id.user_profile_mail);
         user_profile_loading = (ProgressBar)findViewById(R.id.user_profile_loading);
 
-        String imgUrl;
-
         SharedPreferences pref = getSharedPreferences("user",Context.MODE_PRIVATE);
         if(pref.contains("nombre") && pref.contains("correo") && pref.contains("apellido")){
             final String nombre = pref.getString("nombre", "") + " " + pref.getString("apellido", "");
             final String correo = pref.getString("correo", "");
-            imgUrl = pref.getString("img", "");
+            final String imgSubidas = pref.getString("imgSubidas","");
             //Revisa si el token no esta vacio o es diferente de nulo
             if((!nombre.isEmpty() || nombre != null) && (!correo.isEmpty() || correo != null)){
                 user_profile_name.setText(nombre);
                 user_profile_mail.setText(correo);
+
             }else{
                 profileQuery();
             }
