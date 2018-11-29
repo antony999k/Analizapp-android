@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
     }
 
     public void loadImages(){
-        Call<CustomResponse<Image>> call = apiService.allImages();
+        Call<CustomResponse<Image>> call = apiService.allImagesMe();
         call.enqueue(new Callback<CustomResponse<Image>>() {
             @Override
             public void onResponse(Call<CustomResponse<Image>> call, Response<CustomResponse<Image>> response) {
