@@ -59,7 +59,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
         public ImageView imageView;
 
-        ProgressBar progressBar;
+        //ProgressBar progressBar;
         Image image;
 
 
@@ -69,7 +69,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
             textView = view.findViewById(R.id.imageTitle);
             imageView = view.findViewById(R.id.image);
-            progressBar = view.findViewById(R.id.progressBar);
+            //progressBar = view.findViewById(R.id.progressBar);
 
 
         }
@@ -106,7 +106,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if(response.isSuccessful()){
                         Bitmap bmp =  BitmapFactory.decodeStream(response.body().byteStream());
-                        progressBar.setVisibility(View.GONE);
+                        //progressBar.setVisibility(View.GONE);
                         imageView.setImageBitmap(bmp);
                     }
                 }
