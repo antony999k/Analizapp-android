@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
@@ -31,6 +32,7 @@ public class ProfileFragment extends Fragment {
 
     RecyclerView recyclerView;
     ApiService apiService;
+    ProgressBar profile_fragment_loading;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -43,21 +45,18 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
         recyclerView = view.findViewById(R.id.images);
-
+        profile_fragment_loading = (ProgressBar)view.findViewById(R.id.profile_fragment_loading);
 
         loadImages();
 
         return view;
-
     }
 
     public void loadImages(){
+        profile_fragment_loading.setVisibility(View.VISIBLE);
         Call<CustomResponse<Image>> call = apiService.allImagesMe();
         call.enqueue(new Callback<CustomResponse<Image>>() {
             @Override
@@ -71,6 +70,7 @@ public class ProfileFragment extends Fragment {
                         }
                     };
 
+                    profile_fragment_loading.setVisibility(View.GONE);
                     ImagesAdapter imagesAdapter = new ImagesAdapter(response.body().getResults(), apiService, listener );
                     LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                     llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -80,6 +80,7 @@ public class ProfileFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<CustomResponse<Image>> call, Throwable t) {
+                profile_fragment_loading.setVisibility(View.GONE);
                 t.printStackTrace();
             }
         });
