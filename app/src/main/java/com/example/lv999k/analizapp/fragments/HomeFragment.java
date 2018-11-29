@@ -119,6 +119,7 @@ public class HomeFragment extends Fragment {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     //home_btn_take_picture.setEnabled(false);
                     ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                    return;
                 }
 
                 dispatchTakePictureIntent();
@@ -128,6 +129,12 @@ public class HomeFragment extends Fragment {
         home_btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    //home_btn_take_picture.setEnabled(false);
+                    ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                    return;
+                }
+
                 Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 photoPickerIntent.setType("image/*");
 //                photoPickerIntent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
