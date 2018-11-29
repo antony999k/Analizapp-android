@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lv999k.analizapp.Principal;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.mikephil.charting.data.Entry;
 import com.example.lv999k.analizapp.R;
 import com.example.lv999k.analizapp.adapters.ImagesAdapter;
@@ -55,12 +56,14 @@ public class ImageInfoFragment extends Fragment {
     ImageView imageView;
     TextView titleView;
     TextView descriptionView;
-    ProgressBar progressBar;
     PieChart area_chart;
 
     //Textview de imagen
     TextView infoImage_time_minutes;
     TextView infoImage_degree;
+
+    //Extra (carga de pantalla)
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     @SuppressWarnings("FieldCanBeLocal")
     public ImageInfoFragment() {
@@ -92,13 +95,13 @@ public class ImageInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image_info, container, false);
 
-        progressBar = view.findViewById(R.id.progressBar);
         imageView = view.findViewById(R.id.imageView);
         titleView = view.findViewById(R.id.title);
         descriptionView = view.findViewById(R.id.description);
         area_chart = (PieChart) view.findViewById(R.id.area_chart);
         infoImage_time_minutes = (TextView)view.findViewById(R.id.infoImage_time_minutes);
         infoImage_degree = (TextView)view.findViewById(R.id.infoImage_degree);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         setImageInfo();
         loadImage();
@@ -119,17 +122,18 @@ public class ImageInfoFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     bmp_analyzed =  BitmapFactory.decodeStream(response.body().byteStream());
-                    progressBar.setVisibility(View.GONE);
                     imageView.setVisibility(View.VISIBLE);
                     imageView.setImageBitmap(bmp_analyzed);
                     loadOriginal();
-
-
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
                 t.printStackTrace();
             }
         });
@@ -196,6 +200,18 @@ public class ImageInfoFragment extends Fragment {
 
         infoImage_time_minutes.setText(String.valueOf(image.getTiempo_minutos()));
         infoImage_degree.setText(String.valueOf(image.getGrados()));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
 }

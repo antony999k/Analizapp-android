@@ -24,17 +24,31 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                xmlns:shimmer="http://schemas.android.com/tools"
+                shimmer:duration="500">
+
+                <View
+                    android:id="@+id/imageView_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/background"
+                    android:visibility="visible" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:visibility="gone" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
 
             <View
                 android:id="@+id/divider1"
