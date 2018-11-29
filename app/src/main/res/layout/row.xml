@@ -12,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:adjustViewBounds="true"
-        android:cropToPadding="false"
         android:background="@color/background"
-        android:minHeight="200dp"/>
+        android:cropToPadding="false"
+        android:minHeight="200dp"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/imageTitle"

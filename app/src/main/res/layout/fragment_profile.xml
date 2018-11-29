@@ -48,8 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_cover_image"
-                android:elevation="4dp"
-                android:paddingBottom="24dp">
+                android:elevation="4dp">
 
                 <ProgressBar
                     android:id="@+id/user_profile_loading"
@@ -106,8 +105,17 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </RelativeLayout>
-
         </RelativeLayout>
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#000000"
+            android:alpha="0.12"
+            android:visibility="visible" />
 
         <RelativeLayout
             android:layout_width="match_parent"
