@@ -63,6 +63,7 @@
     <string name="CreateExperiment">Create Experiment</string>
     <string name="Comments">Comments</string>
     <string name="ImageAnalysis">Image analysis</string>
+    <string name="TimeMinutes">Time Minutes</string>
 
 
 </resources>
