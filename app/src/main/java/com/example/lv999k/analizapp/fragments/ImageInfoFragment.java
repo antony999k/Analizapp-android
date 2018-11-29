@@ -33,6 +33,7 @@ import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -61,6 +62,8 @@ public class ImageInfoFragment extends Fragment {
     //Textview de imagen
     TextView infoImage_time_minutes;
     TextView infoImage_degree;
+    TextView areaPicosView;
+    TextView areaAbajoView;
 
     //Extra (carga de pantalla)
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -102,6 +105,9 @@ public class ImageInfoFragment extends Fragment {
         infoImage_time_minutes = (TextView)view.findViewById(R.id.infoImage_time_minutes);
         infoImage_degree = (TextView)view.findViewById(R.id.infoImage_degree);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
+        areaAbajoView = view.findViewById(R.id.areaAbajo);
+        areaPicosView = view.findViewById(R.id.areaPicos);
 
         setImageInfo();
         loadImage();
@@ -182,7 +188,7 @@ public class ImageInfoFragment extends Fragment {
         ArrayList NoOfEmp = new ArrayList();
         NoOfEmp.add(new Entry((float) image.getArea_abajo(), 0));
         NoOfEmp.add(new Entry((float)image.getArea_picos(), 1));
-        PieDataSet dataSet = new PieDataSet(NoOfEmp, "Areas");
+        PieDataSet dataSet = new PieDataSet(NoOfEmp, "");
 
         ArrayList year = new ArrayList();
         year.add("Área de Abajo");
@@ -191,13 +197,21 @@ public class ImageInfoFragment extends Fragment {
         data.setValueTextSize(12f);
         area_chart.setDrawHoleEnabled(true);
         area_chart.setHoleColorTransparent(true);
-        area_chart.setHoleRadius(20);
+        area_chart.setHoleRadius(35);
         area_chart.setTransparentCircleRadius(30);
         area_chart.setData(data);
         area_chart.setDescription("");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         area_chart.animateXY(1000, 1000);
+        area_chart.setUsePercentValues(true);
+        data.setValueTextSize(15f);
+        data.setValueFormatter(new PercentFormatter());
 
+        NumberFormat numberFormat = NumberFormat.getInstance();
+
+
+        areaPicosView.setText(numberFormat.format(image.getArea_picos()) + " um^2");
+        areaAbajoView.setText(numberFormat.format(image.getArea_abajo()) + " um^2");
         infoImage_time_minutes.setText(String.valueOf(image.getTiempo_minutos()));
         infoImage_degree.setText(String.valueOf(image.getGrados()));
     }
