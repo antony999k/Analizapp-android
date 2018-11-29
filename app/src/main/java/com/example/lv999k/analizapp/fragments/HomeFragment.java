@@ -48,8 +48,11 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.example.lv999k.analizapp.fragments.NewImageFragment;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -117,6 +120,7 @@ public class HomeFragment extends Fragment {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     //home_btn_take_picture.setEnabled(false);
                     ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                    return;
                 }
 
                 dispatchTakePictureIntent();
@@ -126,6 +130,12 @@ public class HomeFragment extends Fragment {
         home_btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    //home_btn_take_picture.setEnabled(false);
+                    ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                    return;
+                }
+
                 Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 photoPickerIntent.setType("image/*");
 //                photoPickerIntent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
@@ -212,7 +222,31 @@ public class HomeFragment extends Fragment {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK){
             try{
                 Uri selectedImage = data.getData();
-                Fragment fragment = NewImageFragment.newInstance(selectedImage);
+                String path = "";
+                if(selectedImage == null){
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+
+                    //create a file to write bitmap data
+                    File f = new File(getActivity().getBaseContext().getCacheDir().getPath(), String.valueOf(System.currentTimeMillis())+".jpg");
+                    f.createNewFile();
+
+                    //Convert bitmap to byte array
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                    byte[] bitmapdata = bos.toByteArray();
+
+                    //write the bytes in file
+                    FileOutputStream fos = new FileOutputStream(f);
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                    path = f.getPath();
+                }
+                else{
+                    path = getRealPath(selectedImage);
+                }
+                NewImageFragment fragment = NewImageFragment.newInstance(path);
                 ((Principal) this.getActivity()).setFragment(fragment);
             } catch (Exception e){
                 e.printStackTrace();

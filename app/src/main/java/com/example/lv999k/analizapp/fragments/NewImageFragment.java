@@ -68,11 +68,11 @@ public class NewImageFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static NewImageFragment newInstance(Uri image){
+    public static NewImageFragment newInstance(String img_path){
         NewImageFragment fragment = new NewImageFragment();
         Bundle args = new Bundle();
 
-        args.putString("uri", image.toString());
+        args.putString("img_path", img_path);
         fragment.setArguments(args);
 
         return fragment;
@@ -85,9 +85,7 @@ public class NewImageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         apiService = ((Principal) this.getActivity()).apiService;
         if (getArguments() != null) {
-            String string = getArguments().getString("uri");
-            image = Uri.parse(string);
-            img_path = getRealPath(image);
+            img_path = getArguments().getString("img_path");
         }
     }
 
@@ -135,7 +133,7 @@ public class NewImageFragment extends Fragment {
 
         File file = new File(img_path);
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(image)), file);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
 
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
@@ -176,26 +174,6 @@ public class NewImageFragment extends Fragment {
         });
 
 
-    }
-
-    public String getRealPath(Uri uri){
-        // Will return "image:x*"
-        String wholeID = DocumentsContract.getDocumentId(uri);
-        // Split at colon, use second item in the array
-        String id = wholeID.split(":")[1];
-        String[] column = { MediaStore.Images.Media.DATA };
-        // where id is equal to
-        String sel = MediaStore.Images.Media._ID + "=?";
-        Cursor cursor = getActivity().getContentResolver().
-                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        column, sel, new String[]{ id }, null);
-        String filePath = "";
-        int columnIndex = cursor.getColumnIndex(column[0]);
-        if (cursor.moveToFirst()) {
-            filePath = cursor.getString(columnIndex);
-        }
-        cursor.close();
-        return filePath;
     }
 
 
