@@ -21,28 +21,50 @@
                 android:layout_marginBottom="8dp"
                 android:text="Vanadio - 001"
                 android:textAlignment="center"
-                android:textSize="22sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                xmlns:shimmer="http://schemas.android.com/tools"
+                shimmer:duration="500">
+
+                <View
+                    android:id="@+id/imageView_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/background"
+                    android:visibility="visible" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
+            <View
+                android:id="@+id/divider1"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:alpha="0.12"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/info_commet_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Comments"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,13 +73,21 @@
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pulvinar arcu ipsum, a eleifend tortor venenatis sed. Nunc tristique fermentum lorem, vitae finibus tortor molestie non" />
 
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:alpha="0.12"
+                android:visibility="visible" />
+
             <TextView
                 android:id="@+id/info_analytic_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:text="@string/ImageAnalysis"
-                android:layout_marginTop="8dp"
                 android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.PieChart
@@ -65,6 +95,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dip"
                 android:layout_weight="1" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#000000"
+                android:alpha="0.12"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/TimeMinutes"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/infoImage_time_minutes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#000000"
+                android:alpha="0.12"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Degrees"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/infoImage_degree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -1,6 +1,5 @@
 package com.example.lv999k.analizapp.fragments;
 
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lv999k.analizapp.Principal;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.mikephil.charting.data.Entry;
 import com.example.lv999k.analizapp.R;
 import com.example.lv999k.analizapp.adapters.ImagesAdapter;
@@ -56,8 +56,14 @@ public class ImageInfoFragment extends Fragment {
     ImageView imageView;
     TextView titleView;
     TextView descriptionView;
-    ProgressBar progressBar;
     PieChart area_chart;
+
+    //Textview de imagen
+    TextView infoImage_time_minutes;
+    TextView infoImage_degree;
+
+    //Extra (carga de pantalla)
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     @SuppressWarnings("FieldCanBeLocal")
     public ImageInfoFragment() {
@@ -89,44 +95,18 @@ public class ImageInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image_info, container, false);
 
-        progressBar = view.findViewById(R.id.progressBar);
         imageView = view.findViewById(R.id.imageView);
         titleView = view.findViewById(R.id.title);
         descriptionView = view.findViewById(R.id.description);
         area_chart = (PieChart) view.findViewById(R.id.area_chart);
+        infoImage_time_minutes = (TextView)view.findViewById(R.id.infoImage_time_minutes);
+        infoImage_degree = (TextView)view.findViewById(R.id.infoImage_degree);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         setImageInfo();
         loadImage();
 
-        //addData();
-        ArrayList NoOfEmp = new ArrayList();
-        NoOfEmp.add(new Entry(945f, 0));
-        NoOfEmp.add(new Entry(1040f, 1));
-        NoOfEmp.add(new Entry(1133f, 2));
-        NoOfEmp.add(new Entry(1240f, 3));
-        NoOfEmp.add(new Entry(1369f, 4));
-        NoOfEmp.add(new Entry(1487f, 5));
-        NoOfEmp.add(new Entry(1501f, 6));
-        NoOfEmp.add(new Entry(1645f, 7));
-        NoOfEmp.add(new Entry(1578f, 8));
-        NoOfEmp.add(new Entry(1695f, 9));
-        PieDataSet dataSet = new PieDataSet(NoOfEmp, "Number Of Employees");
-
-        ArrayList year = new ArrayList();
-        year.add("2008");
-        year.add("2009");
-        year.add("2010");
-        year.add("2011");
-        year.add("2012");
-        year.add("2013");
-        year.add("2014");
-        year.add("2015");
-        year.add("2016");
-        year.add("2017");
-        PieData data = new PieData(year, dataSet);
-        area_chart.setData(data);
-        //dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        //area_chart.animateXY(5000, 5000);
+        addData();
 
         return view;
     }
@@ -142,17 +122,18 @@ public class ImageInfoFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     bmp_analyzed =  BitmapFactory.decodeStream(response.body().byteStream());
-                    progressBar.setVisibility(View.GONE);
                     imageView.setVisibility(View.VISIBLE);
                     imageView.setImageBitmap(bmp_analyzed);
                     loadOriginal();
-
-
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
                 t.printStackTrace();
             }
         });
@@ -195,34 +176,42 @@ public class ImageInfoFragment extends Fragment {
 
     private void addData() {
         //Set chart
+        image.getArea_abajo();
+        image.getArea_picos();
+
         ArrayList NoOfEmp = new ArrayList();
-        NoOfEmp.add(new Entry(945f, 0));
-        NoOfEmp.add(new Entry(1040f, 1));
-        NoOfEmp.add(new Entry(1133f, 2));
-        NoOfEmp.add(new Entry(1240f, 3));
-        NoOfEmp.add(new Entry(1369f, 4));
-        NoOfEmp.add(new Entry(1487f, 5));
-        NoOfEmp.add(new Entry(1501f, 6));
-        NoOfEmp.add(new Entry(1645f, 7));
-        NoOfEmp.add(new Entry(1578f, 8));
-        NoOfEmp.add(new Entry(1695f, 9));
-        PieDataSet dataSet = new PieDataSet(NoOfEmp, "Number Of Employees");
+        NoOfEmp.add(new Entry((float) image.getArea_abajo(), 0));
+        NoOfEmp.add(new Entry((float)image.getArea_picos(), 1));
+        PieDataSet dataSet = new PieDataSet(NoOfEmp, "Areas");
 
         ArrayList year = new ArrayList();
-        year.add("2008");
-        year.add("2009");
-        year.add("2010");
-        year.add("2011");
-        year.add("2012");
-        year.add("2013");
-        year.add("2014");
-        year.add("2015");
-        year.add("2016");
-        year.add("2017");
+        year.add("Área de Abajo");
+        year.add("Área de picos");
         PieData data = new PieData(year, dataSet);
+        data.setValueTextSize(12f);
+        area_chart.setDrawHoleEnabled(true);
+        area_chart.setHoleColorTransparent(true);
+        area_chart.setHoleRadius(20);
+        area_chart.setTransparentCircleRadius(30);
         area_chart.setData(data);
+        area_chart.setDescription("");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        area_chart.animateXY(5000, 5000);
+        area_chart.animateXY(1000, 1000);
+
+        infoImage_time_minutes.setText(String.valueOf(image.getTiempo_minutos()));
+        infoImage_degree.setText(String.valueOf(image.getGrados()));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
 }

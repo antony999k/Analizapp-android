@@ -47,8 +47,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        recyclerView = view.findViewById(R.id.images);
         profile_fragment_loading = (ProgressBar)view.findViewById(R.id.profile_fragment_loading);
+        recyclerView = view.findViewById(R.id.images);
 
         loadImages();
 
