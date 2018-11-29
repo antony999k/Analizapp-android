@@ -40,7 +40,7 @@ public class Image implements Serializable {
         return area_abajo;
     }
 
-    public Image(int id, String metal, String experimento, double tiempo_minutos, double grados, double area_picos, double area_abajo, String descripcion, String filename , String ruta_original, String ruta_analisis) {
+    public Image(int id, String metal, String experimento, double tiempo_minutos, double grados, double area_picos, double area_abajo) {
         this.id = id;
         this.metal = metal;
         this.experimento = experimento;

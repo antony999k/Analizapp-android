@@ -9,6 +9,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,14 +24,20 @@ import android.widget.Toast;
 
 import com.example.lv999k.analizapp.Principal;
 import com.example.lv999k.analizapp.R;
+import com.example.lv999k.analizapp.adapters.ImagesAdapter;
 import com.example.lv999k.analizapp.bo.Experiment;
+import com.example.lv999k.analizapp.bo.Image;
 import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.utils.CustomResponse;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -62,7 +70,7 @@ public class NewImageFragment extends Fragment {
     EditText degreesText;
     EditText descriptionText;
 
-
+    Image imageA;
 
     public NewImageFragment() {
         // Required empty public constructor
@@ -115,8 +123,6 @@ public class NewImageFragment extends Fragment {
         loadMetals();
         loadExperiments();
 
-
-
         return view;
     }
 
@@ -156,15 +162,23 @@ public class NewImageFragment extends Fragment {
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<ResponseBody> call, final Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     save_button.setEnabled(true);
-                    Toast.makeText(getActivity().getBaseContext(), "Se analizo imagen con exito", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
+                    Toast.makeText(getActivity().getBaseContext(), response.body().toString(), Toast.LENGTH_LONG).show();
+                    //ob2.getString("")
+
                     final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack();
+                    //fm.popBackStack();
+
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    Fragment mFrag = new ImageInfoFragment();
+                    fragmentTransaction.replace(R.id.drawer_layout, mFrag);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
                 else{
                     Toast.makeText(getActivity().getBaseContext(), "Error al analizar la imagen", Toast.LENGTH_LONG).show();
