@@ -48,6 +48,11 @@ public class ImageInfoFragment extends Fragment {
 
     Image image;
 
+    Bitmap bmp_original;
+    Bitmap bmp_analyzed;
+
+    boolean original_set = false;
+
     ImageView imageView;
     TextView titleView;
     TextView descriptionView;
@@ -93,7 +98,7 @@ public class ImageInfoFragment extends Fragment {
         setImageInfo();
         loadImage();
 
-        addData();
+//        addData();
 
         return view;
     }
@@ -109,18 +114,55 @@ public class ImageInfoFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
-                    Bitmap bmp =  BitmapFactory.decodeStream(response.body().byteStream());
+                    bmp_analyzed =  BitmapFactory.decodeStream(response.body().byteStream());
                     progressBar.setVisibility(View.GONE);
                     imageView.setVisibility(View.VISIBLE);
-                    imageView.setImageBitmap(bmp);
+                    imageView.setImageBitmap(bmp_analyzed);
+                    loadOriginal();
+
+
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
             }
         });
+
+
+    }
+
+    public void loadOriginal(){
+        Call<ResponseBody> call = apiService.loadOriginalImage(image.getFilename());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    bmp_original =  BitmapFactory.decodeStream(response.body().byteStream());
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            swapImage();
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void swapImage(){
+        if(original_set){
+            imageView.setImageBitmap(bmp_analyzed);
+            original_set = false;
+        }
+        else{
+            imageView.setImageBitmap(bmp_original);
+            original_set = true;
+        }
     }
 
     private void addData() {
