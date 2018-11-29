@@ -51,6 +51,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.lv999k.analizapp.fragments.NewImageFragment;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -212,7 +214,7 @@ public class HomeFragment extends Fragment {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK){
             try{
                 Uri selectedImage = data.getData();
-                Fragment fragment = NewImageFragment.newInstance(selectedImage);
+                NewImageFragment fragment = NewImageFragment.newInstance(getRealPath(selectedImage));
                 ((Principal) this.getActivity()).setFragment(fragment);
             } catch (Exception e){
                 e.printStackTrace();
