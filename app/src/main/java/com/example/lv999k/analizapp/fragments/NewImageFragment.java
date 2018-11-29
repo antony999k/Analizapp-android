@@ -78,8 +78,6 @@ public class NewImageFragment extends Fragment {
         return fragment;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +122,13 @@ public class NewImageFragment extends Fragment {
 
 
     public void save(){
+        save_button.setEnabled(false);
+
+        if (!validateForm()) {
+            onNotValidateForm();
+            return;
+        }
+
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AnalizapTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -153,6 +158,7 @@ public class NewImageFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+                    save_button.setEnabled(true);
                     Toast.makeText(getActivity().getBaseContext(), "Se analizo imagen con exito", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                     final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -162,6 +168,7 @@ public class NewImageFragment extends Fragment {
                 }
                 else{
                     Toast.makeText(getActivity().getBaseContext(), "Error al analizar la imagen", Toast.LENGTH_LONG).show();
+                    save_button.setEnabled(true);
                     progressDialog.dismiss();
                 }
             }
@@ -169,13 +176,13 @@ public class NewImageFragment extends Fragment {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getActivity().getBaseContext(), "Error al conectarse con el servidor", Toast.LENGTH_LONG).show();
+                save_button.setEnabled(true);
                 progressDialog.dismiss();
             }
         });
 
 
     }
-
 
     public void loadExperiments(){
         Call<CustomResponse<Experiment>> call = apiService.allExperiments();
@@ -194,8 +201,6 @@ public class NewImageFragment extends Fragment {
             }
         });
     }
-
-
 
     public void loadMetals(){
         Call<CustomResponse<Metal>> call = apiService.allMetals();
@@ -225,7 +230,6 @@ public class NewImageFragment extends Fragment {
         experiment_dropdown.setAdapter(adapter);
     }
 
-
     public void setMetalNames(){
         metal_names = new ArrayList<>();
         for(Metal metal: metals){
@@ -235,5 +239,40 @@ public class NewImageFragment extends Fragment {
         metal_dropdown.setAdapter(adapter);
     }
 
+    public boolean validateForm() {
+        boolean valid = true;
+
+        String timeTextStr = timeText.getText().toString();
+        String degreesTextStr = degreesText.getText().toString();
+        String descriptionTextStr = descriptionText.getText().toString();
+
+        if (timeTextStr.isEmpty() ) {
+            timeText.setError("ingresa un tiempo");
+            valid = false;
+        } else {
+            timeText.setError(null);
+        }
+
+        if (degreesTextStr.isEmpty()) {
+            degreesText.setError("Ingresa grados");
+            valid = false;
+        } else {
+            degreesText.setError(null);
+        }
+
+        if (descriptionTextStr.isEmpty()) {
+            descriptionText.setError("Ingresa una descripción");
+            valid = false;
+        } else {
+            descriptionText.setError(null);
+        }
+
+        return valid;
+    }
+
+    public void onNotValidateForm(){
+        Toast.makeText(getActivity().getBaseContext(), "Ingresa todos los campos", Toast.LENGTH_LONG).show();
+        save_button.setEnabled(true);
+    }
 
 }
