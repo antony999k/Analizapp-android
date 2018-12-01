@@ -47,6 +47,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.android.volley.VolleyLog.TAG;
+
 /**
  * Created by javiercuriel on 11/27/18.
  */
@@ -166,19 +168,14 @@ public class NewImageFragment extends Fragment {
                 if(response.isSuccessful()){
                     save_button.setEnabled(true);
                     progressDialog.dismiss();
-                    Toast.makeText(getActivity().getBaseContext(), response.body().toString(), Toast.LENGTH_LONG).show();
-                    //ob2.getString("")
 
                     final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    //fm.popBackStack();
+                    fm.popBackStack();
 
-                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    Fragment mFrag = new ImageInfoFragment();
-                    fragmentTransaction.replace(R.id.drawer_layout, mFrag);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+
+                    //goToImageInfo(19);
                 }
                 else{
                     Toast.makeText(getActivity().getBaseContext(), "Error al analizar la imagen", Toast.LENGTH_LONG).show();
@@ -195,7 +192,10 @@ public class NewImageFragment extends Fragment {
             }
         });
 
+    }
 
+    List<Metal> resultsMetal;
+    public void goToImageInfo(Integer id){
     }
 
     public void loadExperiments(){

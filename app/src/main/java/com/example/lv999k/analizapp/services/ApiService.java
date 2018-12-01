@@ -66,7 +66,7 @@ public interface ApiService {
     @GET("metal/all")
     Call<CustomResponse<Metal>> allMetals();
     @GET("metal/get/{id}")
-    Call<ResponseBody> getMetal(@Path("id") Integer id);
+    Call<CustomResponse<Metal>> getMetal(@Path("id") Integer id);
     @POST("metal/new")
     Call<ResponseBody> newMetal(@Body Metal metal);
     @PUT("metal/update/{id}")

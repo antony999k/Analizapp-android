@@ -92,7 +92,6 @@ public class ProfileFragment extends Fragment {
                 if(!imgSubidas.isEmpty() || imgSubidas != null){
                     user_profile_linearLayout_images.setText(imgSubidas);
                 }
-
             }else{
                 profileQuery();
             }
