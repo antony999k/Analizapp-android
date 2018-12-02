@@ -30,6 +30,8 @@ import com.example.lv999k.analizapp.bo.Image;
 import com.example.lv999k.analizapp.bo.Metal;
 import com.example.lv999k.analizapp.services.ApiService;
 import com.example.lv999k.analizapp.utils.CustomResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -140,7 +142,7 @@ public class NewImageFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AnalizapTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Analizando Imagen...");
+        progressDialog.setMessage("Analizando Imágen...");
         progressDialog.show();
 
 
@@ -168,12 +170,11 @@ public class NewImageFragment extends Fragment {
                 if(response.isSuccessful()){
                     save_button.setEnabled(true);
                     progressDialog.dismiss();
-
+                    Toast.makeText(getActivity().getBaseContext(), "Imágen se analizo con éxito", Toast.LENGTH_LONG).show();
                     final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack();
-
 
                     //goToImageInfo(19);
                 }
@@ -194,8 +195,8 @@ public class NewImageFragment extends Fragment {
 
     }
 
-    List<Metal> resultsMetal;
     public void goToImageInfo(Integer id){
+
     }
 
     public void loadExperiments(){
